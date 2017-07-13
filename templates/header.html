@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="header">
+    <div class="row">
+      <div class="col-xs-2">
+        <img src="img/logo.png" class="logo" />
+      </div>
+      <div class="col-xs-10">
+        <ul class="right-menu">
+          <li>
+              <a href="#!/admin" ng-class="{active: $route.current.activetab == 'admin'}">Admin Pages</a>
+          </li>
+          <!-- <li>
+              <a href="/business"ng-class="{active: $route.current.activetab == 'business'}">Business Dashboard</a>
+          </li> -->
+          <li>
+            <a href="#!/"ng-class="{active: $route.current.activetab == 'home'}">My Searches</a>
+          </li>
+          <li>
+            <a href="#!/account"ng-class="{active: $route.current.activetab == 'account'}">My Account</a>
+          </li>
+          <li>
+            <a ng-click="logout()"ng-class="{active: $route.current.activetab == 'logout'}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</div>

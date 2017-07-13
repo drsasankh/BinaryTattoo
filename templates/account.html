@@ -1,0 +1,35 @@
+<ng-include src="'templates/header.html'"></ng-include>
+<div class="container-fluid">
+  <div class="row blue-row">
+    <div class="col-xs-8">
+      <h4>Account Details</h4>
+    </div>
+
+<!-- {{m.profile}} -->
+    <div class="col-xs-2">
+      <button class="btn btn-danger" ng-disabled="true">Delete Account</button>
+    </div>
+    <div class="col-xs-2">
+      <button class="btn btn-success" ng-click="m.saveChanges()">Save Changes</button>
+    </div>
+
+  </div>
+
+  <div class="row white-row">
+
+    <div class="col-xs-4">
+      <input class="form-control" type="text" ng-model="m.profile.email" placeholder="Email" />
+    </div>
+    <div class="col-xs-6">
+      <div class="checkbox">
+        <label>
+        <input type="checkbox" ng-model="m.profile.emailSubscription">
+        Subscribe to newsletter
+        </label>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

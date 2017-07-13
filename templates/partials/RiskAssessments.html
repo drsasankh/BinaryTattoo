@@ -1,0 +1,158 @@
+<div class="container-fluid sub-section risk-assessment-page" ng-controller="riskAssessmentsController">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="side-bar">
+
+        <select ng-model="m.selectedGetAssessmentFor" ng-options="assessment.value as assessment.value for assessment in m.GetAssessmentFor"></select>
+
+        <h1>Risk Assessment</h1>
+        <div class="green-background" ng-if="m.selectedGetAssessmentFor">
+          <button class="btn btn-success btn-sm" ng-click="m.addRiskAssessment()"><i class="fa fa-plus-circle"></i>Add Risk Assessment</button>
+        </div>
+        <!-- {{m.ListAssessments}} -->
+        <div class="light-gray-background" ng-if="m.selectedGetAssessmentFor">
+          <ul>
+
+            <li ng-repeat="risk in m.ListAssessments" ng-click="m.selectedRiskAssessment = risk.assessmentId" ng-class="{active: m.selectedRiskAssessment == risk.assessmentId}">
+              <div class="white-block">
+                {{risk.name || "Missing name"}}
+                <button class="btn" ng-click="m.deleteRiskAssessment( risk.assessmentId)"><i class="fa fa-trash"></i></button>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      <div class="container-fluid main-content" ng-if="m.selectedGetAssessmentFor" ng-repeat="risk in m.ListAssessments" ng-show="m.selectedRiskAssessment == risk.assessmentId">
+
+        <div class="row heading">
+          <label>Risk Name</label>
+          <input type="text" class="form-control" ng-model-options="{ debounce: 300 }" ng-model="risk.name" />
+        </div>
+
+        <div class="row">
+          <div class="checkbox">
+            <label>
+            <input type="checkbox"  ng-model-options="{ debounce: 300 }" ng-model="risk.privacySetting.selected">
+              Privacy Settings
+            </label>
+          </div>
+        </div>
+        <div class="row well"  ng-class="{disabled: !risk.privacySetting.selected}">
+          <div class="title">
+            Risk Level
+            <div class="btn-group">
+              <label class="btn btn-primary" ng-model="risk.privacySetting.riskLevel" ng-disabled="!risk.privacySetting.selected" ng-repeat="riskType in m.GetAssessmentPointRiskLevels" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+            </div>
+          </div>
+          <textarea ng-model-options="{ debounce: 300 }" ng-model="risk.privacySetting.note" ng-disabled="!risk.privacySetting.selected" placeholder="Add note..."></textarea>
+        </div>
+
+
+
+        <div class="row">
+          <div class="checkbox">
+            <label>
+            <input type="checkbox"  ng-model-options="{ debounce: 300 }" ng-model="risk.dataSecurity.selected">
+              Data Security
+            </label>
+          </div>
+        </div>
+        <div class="row well" ng-class="{disabled: !risk.dataSecurity.selected}">
+          <div class="title">
+            Risk Level
+            <div class="btn-group">
+              <label class="btn btn-primary" ng-model="risk.dataSecurity.riskLevel" ng-disabled="!risk.dataSecurity.selected" ng-repeat="riskType in m.GetAssessmentPointRiskLevels" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+            </div>
+          </div>
+          <textarea ng-model-options="{ debounce: 300 }" ng-model="risk.dataSecurity.note" ng-disabled="!risk.dataSecurity.selected" placeholder="Add note..."></textarea>
+        </div>
+
+
+        <div class="row">
+          <div class="checkbox">
+            <label>
+            <input type="checkbox"  ng-model-options="{ debounce: 300 }" ng-model="risk.location.selected">
+              Location
+            </label>
+          </div>
+        </div>
+        <div class="row well" ng-class="{disabled: !risk.location.selected}">
+          <div class="title">
+            Risk Level
+            <div class="btn-group">
+              <label class="btn btn-primary" ng-model="risk.location.riskLevel" ng-disabled="!risk.location.selected" ng-repeat="riskType in m.GetAssessmentPointRiskLevels" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+            </div>
+            <div class="btn-group">
+              <label class="btn btn-primary" ng-model="risk.location.assessmentPointType" ng-disabled="!risk.location.selected" ng-disabled="!risk.location.selected" ng-repeat="riskType in m.GetAssessmentPointType" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+            </div>
+          </div>
+          <textarea ng-model-options="{ debounce: 300 }" ng-model="risk.location.note" ng-disabled="!risk.location.selected" placeholder="Add note..."></textarea>
+        </div>
+
+
+
+        <div class="row">
+          <div class="checkbox">
+            <label>
+            <input type="checkbox"  ng-model-options="{ debounce: 300 }" ng-model="risk.identityConfusion.selected">
+              Identity Confusion
+            </label>
+          </div>
+        </div>
+        <div class="row well" ng-class="{disabled: !risk.identityConfusion.selected}">
+          <div class="title">
+            Risk Level
+            <div class="btn-group">
+              <label class="btn btn-primary" ng-model="risk.identityConfusion.riskLevel" ng-disabled="!risk.identityConfusion.selected" ng-repeat="riskType in m.GetAssessmentPointRiskLevels" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+            </div>
+          </div>
+          <textarea ng-model-options="{ debounce: 300 }" ng-model="risk.identityConfusion.note" ng-disabled="!risk.identityConfusion.selected" placeholder="Add note..."></textarea>
+        </div>
+
+
+
+        <div class="row">
+          <div class="checkbox">
+            <label>
+            <input type="checkbox"  ng-model-options="{ debounce: 300 }" ng-model="risk.personalInformation.selected">
+              Personal Information
+            </label>
+          </div>
+        </div>
+        <div class="row well" ng-class="{disabled: !risk.personalInformation.selected}">
+          <div class="title">
+            Risk Level
+            <div class="btn-group">
+              <label class="btn btn-primary" ng-model="risk.personalInformation.riskLevel" ng-disabled="!risk.personalInformation.selected" ng-repeat="riskType in m.GetAssessmentPointRiskLevels" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+            </div>
+          </div>
+          <textarea ng-model-options="{ debounce: 300 }" ng-model="risk.personalInformation.note" ng-disabled="!risk.personalInformation.selected" placeholder="Add note..."></textarea>
+        </div>
+
+
+
+        <div class="row">
+          <div class="checkbox">
+            <label>
+            <input type="checkbox"  ng-model-options="{ debounce: 300 }" ng-model="risk.socialNetwork.selected">
+             Social Network
+            </label>
+          </div>
+        </div>
+        <div class="row well" ng-class="{disabled: !risk.socialNetwork.selected}">
+          <div class="title">
+            Risk Level
+            <div class="btn-group">
+              <label class="btn btn-primary" ng-model="risk.socialNetwork.riskLevel" ng-disabled="!risk.socialNetwork.selected" ng-repeat="riskType in m.GetAssessmentPointRiskLevels" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+            </div>
+          </div>
+          <textarea ng-model-options="{ debounce: 300 }" ng-model="risk.socialNetwork.note" ng-disabled="!risk.socialNetwork.selected" placeholder="Add note..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

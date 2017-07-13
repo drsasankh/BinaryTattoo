@@ -1,0 +1,481 @@
+<div class="report-page">
+  <ng-include src="'templates/header.html'"></ng-include>
+
+  <div class="row blue-row">
+
+    <button class="btn btn-grey" ng-click="goto('/')">Cancel</button>
+
+    <button class="btn btn-success pull-right margin-left-10" ng-click="m.publishReport()">Publish Report</button>
+
+    <button class="btn btn-white pull-right margin-left-10" ng-click="m.saveReport()">Save Report</button>
+
+    <button class="btn btn-white pull-right margin-left-10" ng-disabled="true" ng-click="m.previewReport()">Preview Report</button>
+
+
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="side-bar">
+        <h1 class="header">Search Details</h1>
+        <div class="content-block">
+
+
+          <div class="label">First Name</div>
+          <div class="content">{{m.report.firstName}}</div>
+          <div class="label">Last Name</div>
+          <div class="content">{{m.report.lastName}}</div>
+
+          <div class="label">Age Group</div>
+          <div class="content">{{m.report.ageGroup}}</div>
+
+          <div class="label">Nick Name</div>
+          <div class="content">
+            <div ng-repeat="name in m.report.nickNames">
+              {{name}}
+            </div>
+          </div>
+          <div class="label">Email Address</div>
+
+          <div class="content">
+            <div ng-repeat="email in m.report.emailAddresses">
+              {{email}}
+            </div>
+          </div>
+
+          <div class="label">Current Town/City of Residence</div>
+          <div class="content">{{m.report.cityResidence}}</div>
+
+          <div class="label">Town/City you grew up in</div>
+          <div class="content">{{m.report.cityGrewIn}}</div>
+          <div class="label">High school you attended</div>
+          <div class="content">{{m.report.highSchoolAttended}}</div>
+          <div class="label">Post secondary education</div>
+          <div class="content">{{m.report.postSecondaryEducation}}</div>
+          <div class="label">Current school or employer</div>
+          <div class="content">{{m.report.employer}}</div>
+          <div class="label">Past Employer</div>
+          <div class="content">{{m.report.pastEmployer}}</div>
+          <div class="label">Personal Website</div>
+          <div class="content">{{m.report.personalWebsiteURL}}</div>
+          <div class="label">LinkedIn Page</div>
+          <div class="content">{{m.report.linkedInPage}}</div>
+          <div class="label">Facebook Handle</div>
+          <div class="content">{{m.report.faceBookHandle}}</div>
+          <div class="label">Twitter Handle</div>
+          <div class="content">{{m.report.twitterHandle}}</div>
+          <div class="label">Instagram Handle</div>
+          <div class="content">{{m.report.instagramHandle}}</div>
+          <h1>Alignment with corporate values</h1>
+          <div class="label">Expectations as an employee of the company</div>
+          <div class="content">{{m.report.expecationsWithEmployee}}</div>
+          <div class="label">Expectations outside of the company</div>
+          <div class="content">{{m.report.expecationsOutsideCompany}}</div>
+
+          <div class="label">Report Type</div>
+          <div class="content">{{m.report.reportType}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-9 content-side">
+
+      <div class="well">
+        <h1 class="header">Search Results</h1>
+
+        <div class="white-block" ng-repeat="item in m.report.userReportGoogleSearchItems">
+
+          <i class="fa fa-trash" ng-click="m.deleteGoogleSearch($index)"></i>
+          <span class="counter">{{$index + 1}}</span>
+          <h1>{{item.googleImage.title}}</h1>
+          <h2><a href="{{item.googleImage.link}}" target="_blank"><i class="fa fa-external-link"></i>{{item.googleImage.link}}</a>
+            </h2>
+          <hr />
+          <div class="container-fluid">
+            <div class="col-sm-4">
+              <p>
+                {{item.googleImage.snippet}}
+              </p>
+            </div>
+
+            <div class="col-sm-8">
+
+              <div class="container-fluid">
+                <div class="btn-group pull-right">
+                  <label class="btn btn-primary btn-primary-outline {{feedbackType.value | lowercase}}" ng-model="item.reportItemFeedbackType" ng-repeat="feedbackType in m.reportItemFeedbackType" uib-btn-radio="'{{feedbackType.value}}'">{{feedbackType.value}}</label>
+                </div>
+              </div>
+              <div class="container-fluid">
+                <label ng-show="m.report.reportType=='Professional'">Comments</label> <textarea ng-show="m.report.reportType=='Professional'" class="text-control" ng-model="item.comments"></textarea>
+                <button class="btn btn-success btn-green pull-right" ng-show="item.riskAssessments.length == 0 || item.riskAssessments.length == null" ng-click="item.openRiskAssessment = !item.openRiskAssessment">Add Risk Assessment</button>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="risk-assessment" ng-show="item.openRiskAssessment || !(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
+            <div class="risk-header">
+              <button class="btn btn-white btn-sm pull-right margin-left-10">Save</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10">Cancel</button>
+              <h4>Risk Assessment</h4>
+            </div>
+            <select ng-model="item.selectedRiskAssessment" ng-options="assessment.value as assessment.value for assessment in m.GetAssessmentFor"></select>
+             <!-- ng-show="item.selectedRiskAssessment == risk.assessmentId" -->
+             <!-- {{item.selectedRiskAssessment}} -->
+             <!-- <div ng-repeat="risk in m.getAllAssessments(item.selectedRiskAssessment)">
+               {{risk}}
+             </div> -->
+
+          </div>
+        </div>
+
+        <button class="btn btn-primary" ng-click="m.openGoogleSearchModal()">Add Search Results</button>
+      </div>
+
+      <div class="well">
+        <h1 class="header">Image Search Results</h1>
+        <div ng-repeat="item in m.report.userReportGoogleImageSearchItems" class="white-block">
+          <i class="fa fa-trash" ng-click="m.deleteGoogleImageSearch($index)"></i>
+          <span class="counter">{{$index + 1}}</span>
+          <h1>{{item.googleImage.title}} </h1>
+          <h2><a href="{{item.googleImage.link}}"> <i class="fa fa-external-link"></i>Image Link</a></h2>
+
+          <hr />
+          <div class="container-fluid">
+            <div class="col-sm-4">
+              <p>
+                <img ng-src="{{item.googleImage.link}}" />
+              </p>
+            </div>
+            <div class="col-sm-8">
+
+              <div class="container-fluid">
+                <div class="btn-group pull-right">
+                  <label class="btn btn-primary btn-primary-outline {{feedbackType.value | lowercase}}" ng-model="item.reportItemFeedbackType" ng-repeat="feedbackType in m.reportItemFeedbackType" uib-btn-radio="'{{feedbackType.value}}'">{{feedbackType.value}}</label>
+                </div>
+              </div>
+              <div class="container-fluid">
+
+                <label ng-show="m.report.reportType=='Professional'">Comments</label> <textarea ng-show="m.report.reportType=='Professional'" class="text-control" ng-model="item.comments"></textarea>
+                <button class="btn btn-success btn-green pull-right" ng-show="item.riskAssessments.length == 0 || item.riskAssessments.length == null" ng-click="item.openRiskAssessment = !item.openRiskAssessment">Add Risk Assessment</button>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="risk-assessment" ng-show="item.openRiskAssessment || !(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
+            <div class="risk-header">
+              <button class="btn btn-white btn-sm pull-right margin-left-10">Save</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10">Cancel</button>
+              <h4>Risk Assessment</h4>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" ng-click="m.openGoogleImageSearchModal()">Add Image Results</button>
+      </div>
+      <div class="well">
+        <h1 class="header">Twitter</h1>
+        <div class="white-block well">
+          <div class="container-fluid">
+            <label>Account</label>
+            <input class="form-control" ng-model="m.report.twitterHandle" ng-change="m.changeTwitter()" ng-model-options="{debounce:750}" />
+            <!-- <a href="http://www.twitter.com/{{m.report.twitterHandle}}" target="_blank"><i class="fa fa-external-link"></i></a> -->
+
+          </div>
+
+        </div>
+        <div class="white-block well" ng-repeat="twitter in m.report.userReportTwitterUserSearchItems">
+
+          <div class="container-fluid">
+            <div class="col-sm-4">
+              <img ng-src="{{twitter.userTweet.profileImageUrl}}" />
+            </div>
+            <div class="col-sm-8">
+              <div class="bio">
+
+                <label>Bio</label>
+                <p>{{twitter.userTweet.description}}</p>
+
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <button class="btn btn-primary" ng-click="m.openConfusionTwitterModal()">Add confusion account</button>
+      </div>
+
+
+
+
+      <div class="well">
+        <h1 class="header">Tweets</h1>
+        <div class="white-block" ng-repeat="item in m.report.userReportTweetsSearchItems">
+          <!-- {{item}} -->
+          <i class="fa fa-trash" ng-click="m.deleteTweetSearch($index)"></i>
+          <span class="counter">{{$index + 1}}</span>
+          <h1><a ng-href="https://twitter.com/{{m.report.twitterHandle}}/status/{{item.userTweet.id}}">https://twitter.com/{{m.report.twitterHandle}}/status/{{item.userTweet.id}}</a></h1>
+
+          <hr />
+          <div class="container-fluid">
+            <div class="col-sm-4">
+              <p>
+                {{item.userTweet.text}}
+              </p>
+            </div>
+
+            <div class="col-sm-8">
+              <div class="container-fluid">
+                <div class="btn-group pull-right">
+                  <label class="btn btn-primary btn-primary-outline {{feedbackType.value | lowercase}}" ng-model="item.reportItemFeedbackType" ng-repeat="feedbackType in m.reportItemFeedbackType" uib-btn-radio="'{{feedbackType.value}}'">{{feedbackType.value}}</label>
+                </div>
+              </div>
+
+              <div class="container-fluid">
+                <label ng-show="m.report.reportType=='Professional'">Comments</label> <textarea ng-show="m.report.reportType=='Professional'" class="text-control" ng-model="item.comments"></textarea>
+                <button class="btn btn-success btn-green pull-right" ng-show="item.riskAssessments.length == 0 || item.riskAssessments.length == null" ng-click="item.openRiskAssessment = !item.openRiskAssessment">Add Risk Assessment</button>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="risk-assessment" ng-show="item.openRiskAssessment || !(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
+            <div class="risk-header">
+              <button class="btn btn-white btn-sm pull-right margin-left-10">Save</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10">Cancel</button>
+              <h4>Risk Assessment</h4>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" ng-click="m.openTweetModal()">Add Tweet</button>
+      </div>
+
+
+
+
+
+      <div class="well">
+        <h1 class="header">Facebook Settings</h1>
+
+        <div ng-repeat="item in m.report.userReportFacebookItems" class="white-block">
+          <div class="checkbox large">
+            <label>
+              <input type="checkbox" ng-model="item.selected">
+              {{item.itemText}}
+              </label>
+          </div>
+
+          <div class="risk-assessment" ng-show="item.selected || !(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
+            <div class="risk-header">
+              <button class="btn btn-white btn-sm pull-right margin-left-10">Save</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10">Cancel</button>
+              <h4>Risk Assessment</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="well">
+        <h1 class="header">Professional Alignment</h1>
+        <div class="white-block professional-alignment">
+          <div class="container-fluid">
+            <div class="col-md-7">
+
+              <h3>Predicted Alignment</h3>
+            </div>
+            <div class="col-md-5">
+
+              <h3>Data Strength</h3>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="col-md-7">
+              <label class="pull-left">Aligned</label>
+              <label class="pull-right">Not aligned</label>
+              <hr />
+              <div class="btn-group  btn-group-justified">
+                <label class="btn btn-primary" ng-model="m.report.userReportProfessionalAlignment.predictedAlignment" ng-repeat="item in [0,1,2,3,4,5]" uib-btn-radio="'{{$index}}'"></label>
+              </div>
+
+            </div>
+            <div class="col-md-5">
+
+              <label class="pull-left">High</label>
+              <label class="pull-right">Low</label>
+              <hr />
+              <div class="btn-group">
+                <label class="btn btn-primary" ng-model="m.report.userReportProfessionalAlignment.predicatedAlignmentDataStrength" ng-repeat="item in [0,1,2]" uib-btn-radio="'{{$index}}'"></label>
+              </div>
+            </div>
+
+          </div>
+          <hr />
+          <div class="container-fluid">
+            <div class="col-md-12">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="m.report.userReportProfessionalAlignment.overrideAlignmentSelected">
+                Override Alignment
+                </label>
+              </div>
+            </div>
+            <div class="col-md-7">
+
+
+              <label class="pull-left">Aligned</label>
+              <label class="pull-right">Not aligned</label>
+              <hr />
+              <div class="btn-group btn-group-justified">
+                <label ng-disabled="!m.report.userReportProfessionalAlignment.overrideAlignmentSelected" class="btn btn-primary" ng-model="m.report.userReportProfessionalAlignment.overrideAlignment" ng-repeat="item in [0,1,2,3,4,5]" uib-btn-radio="'{{$index}}'"></label>
+              </div>
+
+
+
+
+            </div>
+            <div class="col-md-5">
+
+              <label class="pull-left">High</label>
+              <label class="pull-right">Low</label>
+              <hr />
+              <div class="btn-group">
+                <label ng-disabled="!m.report.userReportProfessionalAlignment.overrideAlignmentSelected" class="btn btn-primary" ng-model="m.report.userReportProfessionalAlignment.overrideAlignmentDataStrength" ng-repeat="item in [0,1,2]" uib-btn-radio="'{{$index}}'"></label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="white-block well">
+          <div class="container-fluid">
+            <label>Overall Alignment</label> <textarea class="form-control" ng-model="m.report.userReportProfessionalAlignment.overrideAlignmentDetails"></textarea>
+
+          </div>
+        </div>
+
+        <div class="white-block well">
+          <div class="container-fluid">
+
+            <div class="checkbox">
+              <label>
+          <input type="checkbox" ng-model="m.report.userReportProfessionalAlignment.recommedationsSelected">
+        Recommendations
+          </label>
+            </div>
+
+            <textarea class="form-control" ng-model="m.report.userReportProfessionalAlignment.recommedationsDetails" ng-show="m.report.userReportProfessionalAlignment.recommedationsSelected"></textarea>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/ng-template" id="googleModal.html">
+  <div class="modal-header">
+    <button type="button pull-right" class="close" data-dismiss="modal" aria-hidden="true" ng-click="m.cancel()"><i class="fa fa-times-circle"></i></button>
+    <h3 class="modal-title">Add Search Result</h3>
+  </div>
+  <div class="modal-body">
+    <div class="smaller-scroller">
+      <div class="white-block" ng-repeat="item in m.googleSearchResultsModal.items">
+
+
+        <input type="checkbox" ng-model="item.selected">
+
+        <h1>{{item.title}} </h1>
+        <h2><a href="{{item.googleImage.link}}">{{item.link}}</a></h2>
+        <p>
+          {{item.snippet}}
+        </p>
+
+      </div>
+    </div>
+    <button class="btn btn-success btn-green" ng-click="m.addGoogleSearchModal()">Add Selected Results</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="googleImageModal.html">
+  <div class="modal-header">
+    <button type="button pull-right" class="close" data-dismiss="modal" aria-hidden="true" ng-click="m.cancel()"><i class="fa fa-times-circle"></i></button>
+    <h3 class="modal-title">Add Search Image Result</h3>
+  </div>
+  <div class="modal-body">
+    <div class="smaller-scroller">
+      <div class="white-block" ng-repeat="item in m.googleImageSearchResultsModal.items">
+
+
+        <input type="checkbox" ng-model="item.selected">
+
+        <h1>{{item.title}} </h1>
+        <h2><a href="{{item.link}}">Image Link</a></h2>
+        <hr />
+        <img ng-src="{{item.link}}" />
+
+      </div>
+    </div>
+    <button class="btn btn-success btn-green" ng-click="m.addGoogleImageSearchModal()">Add Selected Images</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="tweetModal.html">
+  <div class="modal-header">
+    <button type="button pull-right" class="close" data-dismiss="modal" aria-hidden="true" ng-click="m.cancel()"><i class="fa fa-times-circle"></i></button>
+    <h3 class="modal-title">Add Tweets</h3>
+  </div>
+  <div class="modal-body">
+    <div class="smaller-scroller">
+
+      <div class="white-block" ng-repeat="item in m.tweetResultsModal">
+        <!-- {{item}} -->
+        <input type="checkbox" ng-model="item.selected">
+
+        <h1><a ng-href="https://twitter.com/{{m.report.twitterHandle}}/status/{{item.userTweet.id}}">https://twitter.com/{{m.report.twitterHandle}}/status/{{item.userTweet.id}}</a></h1>
+
+        <hr />
+        <p>
+          {{item.text}}
+        </p>
+
+      </div>
+
+    </div>
+    <button class="btn btn-success btn-green" ng-click="m.addTweetSearch()">Add Selected Tweets</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="twitterModal.html">
+  <div class="modal-header">
+    <button type="button pull-right" class="close" data-dismiss="modal" aria-hidden="true" ng-click="m.cancel()"><i class="fa fa-times-circle"></i></button>
+    <h3 class="modal-title">Add Confusion Accounts</h3>
+  </div>
+  <div class="modal-body">
+    <input class="form-control" ng-model="m.twitterConfusionSearchInput" placeholder="Search for confusion accounts..." />
+    <!-- <ul>
+      <li ng-repeat="item in m.googleImageSearchResultsModal.items">
+
+
+        <input type="checkbox" ng-model="item.selected">
+
+        <h1>{{item.title}} </h1>
+        <a href="{{item.link}}">{{item.link}}</a>
+        <img ng-src="{{item.link}}" />
+
+      </li>
+    </ul> -->
+  </div>
+</script>

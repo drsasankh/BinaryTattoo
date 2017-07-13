@@ -1,0 +1,59 @@
+<div class="container login-screen">
+
+  <img src="img/logo.png" class="logo" />
+  <div class="row">
+    <h1>Do you know what you look like to others? Binary Tattoo will uncover your <strong>Personal Digital Identity</strong></h1>
+  </div>
+</div>
+<div class="login-screen-bottom">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-xs-push-1 login col-xs-4">
+        <form>
+          <h2>Login to your account</h2>
+          <input class="form-control" placeholder="EMAIL ADDRESS" ng-model="m.email" type="text" />
+          <input class="form-control" placeholder="PASSWORD" ng-model="m.password" type="password" />
+          <div class="row">
+            <div class="col-xs-12">
+              <button class="btn btn-primary btn-lg col-xs-12" ng-click="m.login()">Login</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-xs-push-3 col-xs-4">
+
+
+        <h2>Create an account</h2>
+        <form>
+          <div class="alert-danger" ng-repeat="error in error">
+            <div ng-repeat="error in error">
+              {{error}}
+            </div>
+          </div>
+          <input class="form-control" placeholder="EMAIL ADDRESS" ng-model="m.registrationemail" type="text" />
+          <input class="form-control" placeholder="PASSWORD" ng-model="m.registrationpassword"  type="password" />
+          <div class="row">
+            <div class="checkbox">
+              <label>
+              <input type="checkbox">
+              Create a <strong>corporate account</strong>
+              </label>
+            </div>
+          </div>
+                <div class="row">
+          <button class="btn btn-success btn-lg col-xs-12" ng-click="m.register()">Create Account</button></div>
+        <div class="row">
+          <div class="checkbox">
+            <label>
+            <input type="checkbox" ng-model="m.emailSubscription" checked>
+            Join the newsletter!
+            </label>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

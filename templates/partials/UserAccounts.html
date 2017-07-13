@@ -1,0 +1,36 @@
+<div class="container-fluid sub-section" ng-controller="userAccountsController">
+  <div class="row blue-row">
+
+    <div class="col-xs-12">
+      <div class="col-xs-4">
+        Email
+      </div>
+      <div class="col-xs-2">
+        Role
+      </div>
+
+
+    </div>
+
+  </div>
+  <div class="row white-row" ng-repeat="user in m.users">
+    <div class="col-xs-12">
+      <div class="col-xs-4">
+        <i class="fa fa-trash trash-can"></i> {{user.email}}
+
+      </div>
+      <div class="col-xs-5">
+        <select ng-model="user.userType" ng-options="user.value as user.value for user in m.userRoles">
+        </select>
+        <button class="btn btn-primary" ng-click="m.saveUserAccount(user)">Update</button>
+
+      </div>
+
+      <!-- <div class="col-xs-3">
+        <button class="btn btn-warning pull-right">Reset Password</button>
+      </div> -->
+    </div>
+
+
+  </div>
+</div>

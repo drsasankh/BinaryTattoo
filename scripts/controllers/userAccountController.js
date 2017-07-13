@@ -1,0 +1,49 @@
+BinaryTattooApp.controller('userAccountsController', function userAccountsController($scope, $http, $rootScope) {
+  $scope.m = {};
+
+  $http.get($rootScope.UATurl + "DomainValues/GetUserRoles").then(
+    function successCallback(response) {
+      //console.log(response.data)
+      $scope.m.userRoles = response.data;
+
+    },
+    function erroCallback(response) {
+      console.log(response.data)
+
+    })
+  $scope.m.getUserAccount = function() {
+    $http.get($rootScope.UATurl + "UserAccount/GetAll").then(
+      function successCallback(response) {
+        console.log(response.data)
+        $scope.m.users = response.data;
+
+      },
+      function erroCallback(response) {
+        console.log(response.data)
+
+      })
+  }
+
+
+$scope.m.saveUserAccount = function(user) {
+  console.log(user);
+  $scope.m.saveUser = {
+  "userId": user.userId,
+  "userType": user.userType
+}
+  $http.post($rootScope.UATurl + "UserAccount/ChangeUserRole", $scope.m.saveUser).then(
+    function successCallback(response) {
+      console.log(response.data)
+
+    },
+    function erroCallback(response) {
+      console.log(response.data)
+
+    })
+}
+
+
+  $scope.m.getUserAccount();
+
+
+});
