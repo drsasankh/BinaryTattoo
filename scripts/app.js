@@ -14,8 +14,8 @@ BinaryTattooApp.controller('mainController', function mainController($scope, loc
     window.scrollTo(0, 0);
 
     if (current.controller == "loginController") {
-      $scope.viewbackground = "login-background";
-    } else $scope.viewbackground = "logged-in-background";
+      $scope.m.viewbackground = "logged-out-background";
+    } else $scope.m.viewbackground = "logged-in-background";
   })
   $scope.logout = function() {
     localStorageService.clearAll();
@@ -26,9 +26,10 @@ BinaryTattooApp.controller('mainController', function mainController($scope, loc
 
 BinaryTattooApp.run(function($rootScope, localStorageService, $location) {
   $rootScope.UATurl = "http://sangeet302.ddns.net/api/";
-$rootScope.ageGroup = [
-  'Less than 13','13-17','18-24','25-34','35-44','45-64','65+'
-]
+
+  $rootScope.ageGroup = [
+    'Less than 13', '13-17', '18-24', '25-34', '35-44', '45-64', '65+'
+  ]
 
   $rootScope.goto = function(path) {
     $location.path(path);
@@ -66,6 +67,11 @@ BinaryTattooApp.config(['$routeProvider', '$locationProvider', function($routePr
     .when('/report/:reportid', {
       templateUrl: 'templates/report.html',
       controller: 'reportController',
+      activetab: 'home'
+    })
+    .when('/view-report/:reportid', {
+      templateUrl: 'templates/view-report.html',
+      controller: 'viewReportController',
       activetab: 'home'
     })
 
@@ -107,31 +113,52 @@ BinaryTattooApp.factory('$debounce', function($timeout, $q) {
 });
 
 BinaryTattooApp.config([
-    "$httpProvider",
-    function($httpProvider) {
+  "$httpProvider",
+  function($httpProvider) {
 
-      $httpProvider.interceptors.push(function($q, $location, localStorageService) {
-        return {
-          'request': function(config) {
-            config.headers = config.headers || {};
-            var token = localStorageService.get("token");
-            if (token) {
-              config.headers.Authorization = 'Bearer ' + token;
-            }
-            return config;
-          },
-          'responseError': function(response) {
-            if (response.status === 401 || response.status === 403) {
-              localStorageService.clearAll()
-              $location.path('/login');
-            }
-            return $q.reject(response);
+    $httpProvider.interceptors.push(function($q, $location, localStorageService) {
+      return {
+        'request': function(config) {
+          config.headers = config.headers || {};
+          var token = localStorageService.get("token");
+          if (token) {
+            config.headers.Authorization = 'Bearer ' + token;
           }
-        };
-      });
-    }
-  ])
+          return config;
+        },
+        'responseError': function(response) {
+          if (response.status === 401 || response.status === 403) {
+            localStorageService.clearAll()
+            $location.path('/login');
+          }
+          return $q.reject(response);
+        }
+      };
+    });
+  }
+])
 
-  .config(['$qProvider', function($qProvider) {
-    $qProvider.errorOnUnhandledRejections(false);
-  }]);
+BinaryTattooApp.config(['$qProvider', function($qProvider) {
+  $qProvider.errorOnUnhandledRejections(false);
+}]);
+
+BinaryTattooApp.directive('uibModalWindow', function(){
+  return {
+    restrict: 'EA',
+    link: function(scope, element) {
+      $(".modal-dialog").draggable();
+    }
+  }
+})
+
+.directive('stopEvent', function () {
+      return {
+          restrict: 'A',
+          link: function (scope, element, attr) {
+              if(attr && attr.stopEvent)
+                  element.bind(attr.stopEvent, function (e) {
+                      e.stopPropagation();
+                  });
+          }
+      };
+   });

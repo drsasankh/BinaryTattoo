@@ -4,6 +4,7 @@ BinaryTattooApp.controller('reportController', function reportController($scope,
   $scope.m.userReportGoogleSearchItems;
   $scope.m.userReportGoogleImageSearchItems;
   $scope.m.userReportTweetsSearchItems;
+  $scope.m.tempRiskAssessments = [];
   $http.get($rootScope.UATurl + "DomainValues/ReportItemFeedbackType").then(
     function successCallback(response) {
       console.log(response.data)
@@ -72,7 +73,9 @@ BinaryTattooApp.controller('reportController', function reportController($scope,
   }
 
   $scope.m.getRiskAssessmentFor = function() {
-    $http.get($rootScope.UATurl + "DomainValues/GetAssessmentFor").then(
+    $http.get($rootScope.UATurl + "DomainValues/GetAssessmentFor", {
+      'cache': true
+    }).then(
       function successCallback(response) {
         console.log(response.data)
         $scope.m.GetAssessmentFor = response.data;
@@ -84,25 +87,36 @@ BinaryTattooApp.controller('reportController', function reportController($scope,
   }
 
 
-  $scope.m.getAllAssessments = function(assessmentFor) {
-    var ListAssessments;
-    if(!assessmentFor){
-    console.log('assessmentfor' + assessmentFor);
-      $http.get($rootScope.UATurl + "RiskAssessmentSetting/GetAll/" + assessmentFor).then(
-        function successCallback(response) {
-            console.log("all assessments" )
-            console.log(response.data);
+  $http.get($rootScope.UATurl + "DomainValues/GetAssessmentPointType").then(
+    function successCallback(response) {
+      console.log(response.data)
+      $scope.m.GetAssessmentPointType = response.data;
+    },
+    function erroCallback(response) {
+      console.log(response.data)
+    })
+  $http.get($rootScope.UATurl + "DomainValues/GetAssessmentPointRiskLevels").then(
+    function successCallback(response) {
+      console.log(response.data)
+      $scope.m.GetAssessmentPointRiskLevels = response.data;
+    },
+    function erroCallback(response) {
+      console.log(response.data)
+    })
 
-         ListAssessments = response.data;
-        },
-        function erroCallback(response) {
-          console.log(response.data)
-        })
-    }
 
-
-      return ListAssessments;
+  $scope.m.getAllAssessments = function(type, index) {
+    $http.get($rootScope.UATurl + "RiskAssessmentSetting/GetAll/" + $scope.m.selectedRiskAssessment).then(
+      function successCallback(response) {
+        console.log(response.data)
+        $scope.m.ListAssessments = response.data;
+        $scope.m.loadRiskData(type, index);
+      },
+      function erroCallback(response) {
+        console.log(response.data)
+      })
   }
+
 
   $scope.m.init = function() {
     $scope.m.getReport();
@@ -290,10 +304,48 @@ BinaryTattooApp.controller('reportController', function reportController($scope,
     }
   }
   $scope.m.populateTwitterSearchModal = function(index) {
-
+    $http.get($rootScope.UATurl + "SocialMedia/GetTwitterResults/" + $scope.m.twitterConfusionSearchInput).then(
+      function successCallback(response) {
+        console.log(response.data)
+        $scope.m.twitterResultsModal = response.data;
+        angular.forEach($scope.m.twitterResultsModal, function(value, key) {
+          console.log(value.profileImageUrl);
+          var str = value.profileImageUrl;
+          value.profileImageUrl = str.replace('_normal', '');
+        })
+        console.log("twitter");
+      },
+      function erroCallback(response) {
+        console.log(response.data)
+      })
   }
   $scope.m.addTwitterSearch = function(result) {
+    angular.forEach($scope.m.twitterResultsModal, function(value, key) {
 
+      var str = value.profileImageUrl;
+      var res = str.replace('_normal', '');
+      var temp = {
+        "userTweet": {
+          "description": value.description,
+          "email": value.email,
+          "favouritesCount": value.favouritesCount,
+          "followersCount": value.followersCount,
+          "friendsCount": value.friendsCount,
+          "id": value.id,
+          "listedCount": value.listedCount,
+          "location": value.location,
+          "name": value.name,
+          "profileBackgroundImageUrl": value.profileBackgroundImageUrl,
+          "profileBannerUrl": value.profileBannerUrl,
+          "profileImageUrl": res,
+          "screenName": value.screenName
+        }
+      }
+      if (value.selected)
+        $scope.m.report.userReportTwitterUserSearchItems.push(temp)
+
+    })
+    modalInstance.dismiss('cancel');
   }
   $scope.m.populateTweetSearch = function() {
     $http.get($rootScope.UATurl + "SocialMedia/GetUserTweets/" + $scope.m.report.twitterHandle).then(
@@ -437,7 +489,191 @@ BinaryTattooApp.controller('reportController', function reportController($scope,
   }
   $scope.m.cancel = function() {
     modalInstance.dismiss('cancel');
+    $scope.m.type = '';
+    $scope.m.index = null;
   };
+
+  $scope.m.addRiskAssessmentModal = function(type, index) {
+    $scope.m.tempRiskAssessments = [];
+    modalInstance = $uibModal.open({
+      animation: true,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'addRiskAssessmentModal.html',
+      size: 'lg',
+      scope: $scope,
+      resolve: {
+        items: function() {
+          return $scope.values;
+        }
+      }
+
+    });
+    $scope.m.type = type;
+    $scope.m.index = index;
+    $scope.m.getAllAssessments(type, index);
+    //  $scope.m.populateTweetSearchhModal();
+  }
+
+
+  $scope.$watch('m.selectedRiskAssessment', function(newValue, oldValue) {
+    $scope.m.getAllAssessments();
+    //$scope.m.selectedRiskAssessment == null
+    $scope.m.checkRiskChanges();
+  })
+
+  $scope.m.checkRiskChanges = function(input) {
+    var found = false;
+    console.log($scope.m.ListAssessments)
+    angular.forEach($scope.m.ListAssessments, function(value, key) {
+      //    console.log('looping ' + key)
+      //  console.log(value)
+      if (value.selected) {
+        if ($scope.m.tempRiskAssessments.length == 0) {
+          console.log('PUSHED')
+          $scope.m.tempRiskAssessments.push(value);
+        } else {
+
+          angular.forEach($scope.m.tempRiskAssessments, function(newValue, key) {
+            if (newValue.assessmentId == value.assessmentId) {
+              console.log('sending in assessmentID' + value.assessmentID)
+              console.log('values in assessmentID' + newValue.assessmentID)
+              console.log('overwritten')
+              $scope.m.tempRiskAssessments[key] = value;
+              found = true;
+            }
+          })
+          if (!found) {
+            console.log('PUSHED')
+            $scope.m.tempRiskAssessments.push(value);
+
+          }
+        }
+
+
+        console.log('tempriskitems:');
+        console.log($scope.m.tempRiskAssessments);
+      }
+      found = false;
+    })
+  }
+
+  $scope.m.loadRiskData = function(type) {
+    angular.forEach($scope.m.ListAssessments, function(value, key) {
+      // console.log(value);
+      //   console.log(key);
+      //   //  console.log($scope.m.ListAssessments[key]);
+      angular.forEach($scope.m.tempRiskAssessments, function(newValue, newkey) {
+
+        if (value.assessmentId == newValue.assessmentId) {
+          $scope.m.ListAssessments[key] = $scope.m.tempRiskAssessments[newkey];
+        }
+      })
+    })
+  }
+  $scope.m.saveRiskData = function(type, index) {
+    $scope.m.checkRiskChanges();
+    console.log('tempriskass')
+    console.log($scope.m.tempRiskAssessments)
+    angular.forEach($scope.m.tempRiskAssessments, function(value, key) {
+      if (!value.selected)
+        $scope.m.tempRiskAssessments.splice(key, 1);
+    })
+    if (type == 'google') {
+      $scope.m.report.userReportGoogleSearchItems[index].riskAssessments = $scope.m.tempRiskAssessments;
+    }
+    if (type == 'googleImage') {
+
+      $scope.m.report.userReportGoogleImageSearchItems[index].riskAssessments = $scope.m.tempRiskAssessments;
+    }
+    if (type == 'twitter') {
+
+      $scope.m.report.userReportTwitterUserSearchItems[index].riskAssessments = $scope.m.tempRiskAssessments;
+    }
+    if (type == 'tweet') {
+
+      $scope.m.report.userReportTweetsSearchItems[index].riskAssessments = $scope.m.tempRiskAssessments;
+    }
+    if (type == 'facebook') {
+
+      $scope.m.report.userReportFacebookItems[index].riskAssessments = $scope.m.tempRiskAssessments;
+    }
+    //  $scope.m.saveReport();
+    modalInstance.dismiss('cancel');
+    $scope.m.tempRiskAssessments = [];
+    $scope.m.type = '';
+    $scope.m.index = null;
+    console.log($scope.m.report)
+  }
+
+  $scope.m.editRiskAssessmentModal = function(type, index) {
+    $scope.m.tempRiskAssessments = [];
+    if (type == 'google') {
+
+      console.log('google')
+      $scope.m.tempRiskAssessments = $scope.m.report.userReportGoogleSearchItems[index].riskAssessments;
+    }
+    if (type == 'googleImage') {
+
+      $scope.m.tempRiskAssessments = $scope.m.report.userReportGoogleImageSearchItems[index].riskAssessments;
+    }
+    if (type == 'twitter') {
+
+      $scope.m.tempRiskAssessments = $scope.m.report.userReportTwitterUserSearchItems[index].riskAssessments;
+    }
+    if (type == 'tweet') {
+
+      $scope.m.tempRiskAssessments = $scope.m.report.userReportTweetsSearchItems[index].riskAssessments;
+    }
+    if (type == 'facebook') {
+      $scope.m.tempRiskAssessments = $scope.m.report.userReportFacebookItems[index].riskAssessments;
+    }
+    console.log('started')
+    console.log($scope.m.tempRiskAssessments);
+    angular.forEach($scope.m.tempRiskAssessments, function(value, key) {
+      value.selected = true
+    })
+    modalInstance = $uibModal.open({
+      animation: true,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'addRiskAssessmentModal.html',
+      size: 'lg',
+      scope: $scope,
+      resolve: {
+        items: function() {
+          return $scope.values;
+        }
+      }
+
+    });
+    $scope.m.type = type;
+    $scope.m.index = index;
+    $scope.m.getAllAssessments(type, index);
+  }
+  $scope.m.deleteRiskAssessmentModal = function(type, index) {
+    if (confirm('Are you sure you wish to delete all?')) {
+      if (type == 'google') {
+        console.log('google')
+        $scope.m.report.userReportGoogleSearchItems[index].riskAssessments = [];
+      }
+      if (type == 'googleImage') {
+
+        $scope.m.report.userReportGoogleImageSearchItems[index].riskAssessments = [];
+      }
+      if (type == 'twitter') {
+
+        $scope.m.report.userReportTwitterUserSearchItems[index].riskAssessments = [];
+      }
+      if (type == 'tweet') {
+
+        $scope.m.report.userReportTweetsSearchItems[index].riskAssessments = [];
+      }
+      if (type == 'facebook') {
+        $scope.m.report.userReportFacebookItems[index].riskAssessments = [];
+      }
+    }
+  }
 
   // $scope.m.getReport();
   //

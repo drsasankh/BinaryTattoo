@@ -360,7 +360,7 @@
 
       <div class="col-xs-2">
 
-        <button class="btn btn-primary pull-right col-xs-12" ng-click="goto('/report/' + report.reportId)">View Report</button>
+        <button class="btn btn-primary pull-right col-xs-12" ng-disabled="report.reportStatus != 'Published'"ng-click="goto('/view-report/' + report.reportId)">View Report</button>
 
       </div>
     </div>

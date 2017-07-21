@@ -11,14 +11,31 @@ html {
   // background: -webkit-linear-gradient(left, #073176 0%,#0d5db9 100%);
   // background: linear-gradient(to right, #073176 0%,#0d5db9 100%);
   // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=  '#073176', endColorstr='#0d5db9', GradientType=1);
+  color: #fff;
+  font-family: 'Roboto', sans-serif !important;
+  margin-bottom: 50px;
+}
+
+.logged-in-background {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#073176+0,0d5db9+100 */
+  background: rgb(7,49,118);
+  /* Old browsers */
+  background: -moz-linear-gradient(left, rgba(7,49,118,1) 0%, rgba(13,93,185,1) 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(7,49,118,1) 0%,rgba(13,93,185,1) 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(7,49,118,1) 0%,rgba(13,93,185,1) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=  '#073176', endColorstr='#0d5db9',GradientType=1 );
+  /* IE6-9 */
+}
+
+.logged-out-background {
   background: url('../img/login-bg.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: #fff;
-  font-family: 'Roboto', sans-serif !important;
-  margin-bottom: 50px;
 }
 
 h1 {
@@ -734,6 +751,16 @@ textarea {
     }
 
     .white-block {
+      .twitter {
+        img {
+          margin: 0;
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+
       .btn-green {
         margin-top: 10px;
         margin-bottom: 10px;
@@ -868,13 +895,30 @@ textarea {
   clear: both;
 
   .risk-header {
-    padding: 6px 10px;
+    padding: 6px 30px;
     font-weight: normal;
     color: #fff;
     background: #1175bc;
 
     h4 {
       margin: 6px 0;
+      font-size: 12px;
+    }
+
+    .btn {
+      margin-top: -3px;
+    }
+  }
+
+  .risk-container {
+    padding: 15px 30px;
+
+    .risk {
+      background: #ccc;
+      border-radius: 30px;
+      padding: 3px 10px;
+      font-size: 10px;
+      color: #fff;
     }
   }
 }
@@ -904,5 +948,17 @@ textarea {
 }
 
 .professional-alignment {
-  .btn {height:30px;}
+  .btn {
+    height: 30px;
+  }
+}
+
+.risk-assessment-modal {
+  .header {
+    background: #2a82cc;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    font-size: 14px;
+  }
 }

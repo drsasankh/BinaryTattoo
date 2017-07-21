@@ -17,24 +17,36 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="side-bar">
-        <h1 class="header">Search Details</h1>
+        <h1 class="header" ng-click="m.editReportDetails()">Search Details <i class="fa fa-pencil pull-right"></i></h1>
         <div class="content-block">
+
 
 
           <div class="label">First Name</div>
           <div class="content">{{m.report.firstName}}</div>
+
+
+
           <div class="label">Last Name</div>
           <div class="content">{{m.report.lastName}}</div>
+
+
 
           <div class="label">Age Group</div>
           <div class="content">{{m.report.ageGroup}}</div>
 
-          <div class="label">Nick Name</div>
-          <div class="content">
-            <div ng-repeat="name in m.report.nickNames">
-              {{name}}
+
+          <div ng-show="m.report.reportType == 'Detailed' || m.report.reportType == 'Professional'">
+            <div class="label">Nick Name</div>
+            <div class="content">
+              <div ng-repeat="name in m.report.nickNames">
+                {{name}}
+              </div>
             </div>
           </div>
+
+
+
           <div class="label">Email Address</div>
 
           <div class="content">
@@ -42,38 +54,90 @@
               {{email}}
             </div>
           </div>
+          <div ng-show="m.report.reportType == 'Detailed' || m.report.reportType == 'Professional'">
 
-          <div class="label">Current Town/City of Residence</div>
-          <div class="content">{{m.report.cityResidence}}</div>
+            <div class="label">Current Town/City of Residence</div>
+            <div class="content">{{m.report.cityResidence}}</div>
 
-          <div class="label">Town/City you grew up in</div>
-          <div class="content">{{m.report.cityGrewIn}}</div>
-          <div class="label">High school you attended</div>
-          <div class="content">{{m.report.highSchoolAttended}}</div>
-          <div class="label">Post secondary education</div>
-          <div class="content">{{m.report.postSecondaryEducation}}</div>
+
+
+
+
+            <div class="label">Town/City you grew up in</div>
+            <div class="content">{{m.report.cityGrewIn}}</div>
+
+
+
+
+            <div class="label">High school you attended</div>
+            <div class="content">{{m.report.highSchoolAttended}}</div>
+
+
+
+            <div class="label">Post secondary education</div>
+            <div class="content">{{m.report.postSecondaryEducation}}</div>
+
+          </div>
+
+
+
           <div class="label">Current school or employer</div>
           <div class="content">{{m.report.employer}}</div>
-          <div class="label">Past Employer</div>
-          <div class="content">{{m.report.pastEmployer}}</div>
-          <div class="label">Personal Website</div>
-          <div class="content">{{m.report.personalWebsiteURL}}</div>
-          <div class="label">LinkedIn Page</div>
-          <div class="content">{{m.report.linkedInPage}}</div>
+
+
+          <div ng-show="m.report.reportType == 'Detailed' || m.report.reportType == 'Professional'">
+
+
+            <div class="label">Past Employer</div>
+            <div class="content">{{m.report.pastEmployer}}</div>
+
+
+
+
+            <div class="label">Personal Website</div>
+            <div class="content">{{m.report.personalWebsiteURL}}</div>
+
+
+
+
+
+            <div class="label">LinkedIn Page</div>
+            <div class="content">{{m.report.linkedInPage}}</div>
+
+          </div>
+
+
           <div class="label">Facebook Handle</div>
           <div class="content">{{m.report.faceBookHandle}}</div>
+
+
+
+
           <div class="label">Twitter Handle</div>
           <div class="content">{{m.report.twitterHandle}}</div>
+
+
+
           <div class="label">Instagram Handle</div>
           <div class="content">{{m.report.instagramHandle}}</div>
-          <h1>Alignment with corporate values</h1>
-          <div class="label">Expectations as an employee of the company</div>
-          <div class="content">{{m.report.expecationsWithEmployee}}</div>
-          <div class="label">Expectations outside of the company</div>
-          <div class="content">{{m.report.expecationsOutsideCompany}}</div>
+
+
+
+          <div ng-show="m.report.reportType == 'Professional'">
+            <h1>Alignment with corporate values</h1>
+            <div class="label">Expectations as an employee of the company</div>
+            <div class="content">{{m.report.expecationsWithEmployee}}</div>
+
+            <div class="label">Expectations outside of the company</div>
+            <div class="content">{{m.report.expecationsOutsideCompany}}</div>
+          </div>
+
 
           <div class="label">Report Type</div>
           <div class="content">{{m.report.reportType}}</div>
+
+
+
         </div>
       </div>
     </div>
@@ -81,7 +145,7 @@
     <div class="col-sm-9 content-side">
 
       <div class="well">
-        <h1 class="header">Search Results</h1>
+        <h1 class="header">Search Results ({{m.report.reportType}} Report)</h1>
 
         <div class="white-block" ng-repeat="item in m.report.userReportGoogleSearchItems">
 
@@ -106,26 +170,22 @@
                 </div>
               </div>
               <div class="container-fluid">
-                <label ng-show="m.report.reportType=='Professional'">Comments</label> <textarea ng-show="m.report.reportType=='Professional'" class="text-control" ng-model="item.comments"></textarea>
-                <button class="btn btn-success btn-green pull-right" ng-show="item.riskAssessments.length == 0 || item.riskAssessments.length == null" ng-click="item.openRiskAssessment = !item.openRiskAssessment">Add Risk Assessment</button>
+                <label ng-show="m.report.reportType=='Professional'">Comments</label> <textarea class="form-control" ng-show="m.report.reportType=='Professional'" class="text-control" ng-model="item.comments"></textarea>
+                <button class="btn btn-success btn-green pull-right" ng-show="item.riskAssessments.length == 0 || item.riskAssessments.length == null" ng-click="m.addRiskAssessmentModal('google', $index)">Add Risk Assessment</button>
               </div>
             </div>
 
 
           </div>
-          <div class="risk-assessment" ng-show="item.openRiskAssessment || !(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
+          <div class="risk-assessment" ng-if="!(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
             <div class="risk-header">
-              <button class="btn btn-white btn-sm pull-right margin-left-10">Save</button>
-              <button class="btn btn-white btn-sm pull-right margin-left-10">Cancel</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.editRiskAssessmentModal('google', $index)">Edit</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.deleteRiskAssessmentModal('google',$index)">Delete All</button>
               <h4>Risk Assessment</h4>
             </div>
-            <select ng-model="item.selectedRiskAssessment" ng-options="assessment.value as assessment.value for assessment in m.GetAssessmentFor"></select>
-             <!-- ng-show="item.selectedRiskAssessment == risk.assessmentId" -->
-             <!-- {{item.selectedRiskAssessment}} -->
-             <!-- <div ng-repeat="risk in m.getAllAssessments(item.selectedRiskAssessment)">
-               {{risk}}
-             </div> -->
-
+            <div ng-repeat="item in item.riskAssessments" class="risk-container">
+              <span class="risk">{{item.name}}</span>
+            </div>
           </div>
         </div>
 
@@ -155,21 +215,23 @@
                 </div>
               </div>
               <div class="container-fluid">
-
-                <label ng-show="m.report.reportType=='Professional'">Comments</label> <textarea ng-show="m.report.reportType=='Professional'" class="text-control" ng-model="item.comments"></textarea>
-                <button class="btn btn-success btn-green pull-right" ng-show="item.riskAssessments.length == 0 || item.riskAssessments.length == null" ng-click="item.openRiskAssessment = !item.openRiskAssessment">Add Risk Assessment</button>
+                <label ng-show="m.report.reportType=='Professional'">Comments</label> <textarea class="form-control" ng-show="m.report.reportType=='Professional'" class="text-control" ng-model="item.comments"></textarea>
+                <button class="btn btn-success btn-green pull-right" ng-show="item.riskAssessments.length == 0 || item.riskAssessments.length == null" ng-click="m.addRiskAssessmentModal('googleImage', $index)">Add Risk Assessment</button>
 
               </div>
             </div>
           </div>
-
-          <div class="risk-assessment" ng-show="item.openRiskAssessment || !(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
+          <div class="risk-assessment" ng-if="!(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
             <div class="risk-header">
-              <button class="btn btn-white btn-sm pull-right margin-left-10">Save</button>
-              <button class="btn btn-white btn-sm pull-right margin-left-10">Cancel</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.editRiskAssessmentModal('googleImage', $index)">Edit</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.deleteRiskAssessmentModal('googleImage',$index)">Delete All</button>
               <h4>Risk Assessment</h4>
             </div>
+            <div ng-repeat="item in item.riskAssessments" class="risk-container">
+              <span class="risk">{{item.name}}</span>
+            </div>
           </div>
+
         </div>
 
         <button class="btn btn-primary" ng-click="m.openGoogleImageSearchModal()">Add Image Results</button>
@@ -185,25 +247,47 @@
           </div>
 
         </div>
-        <div class="white-block well" ng-repeat="twitter in m.report.userReportTwitterUserSearchItems">
+        <div class="white-block well" ng-repeat="item in m.report.userReportTwitterUserSearchItems">
 
+          <i class="fa fa-trash" ng-click="m.deleteTwitterSearch($index)" ng-if="$index>0"></i>
           <div class="container-fluid">
             <div class="col-sm-4">
-              <img ng-src="{{twitter.userTweet.profileImageUrl}}" />
+              <img ng-src="{{item.userTweet.profileImageUrl}}" />
             </div>
             <div class="col-sm-8">
               <div class="bio">
 
                 <label>Bio</label>
-                <p>{{twitter.userTweet.description}}</p>
+                <p>{{item.userTweet.description}}</p>
+
+              </div>
+              <div class="container-fluid">
+                <div class="btn-group pull-right">
+                  <label class="btn btn-primary btn-primary-outline {{feedbackType.value | lowercase}}" ng-model="item.reportItemFeedbackType" ng-repeat="feedbackType in m.reportItemFeedbackType" uib-btn-radio="'{{feedbackType.value}}'">{{feedbackType.value}}</label>
+                </div>
+              </div>
+              <div class="container-fluid">
+                <label ng-show="m.report.reportType=='Professional'">Comments</label> <textarea class="form-control" ng-show="m.report.reportType=='Professional'" class="text-control" ng-model="item.comments"></textarea>
+                <button class="btn btn-success btn-green pull-right" ng-show="item.riskAssessments.length == 0 || item.riskAssessments.length == null" ng-click="m.addRiskAssessmentModal('twitter', $index)">Add Risk Assessment</button>
 
               </div>
             </div>
 
 
           </div>
-
+          <div class="risk-assessment" ng-if="!(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
+            <div class="risk-header">
+              <button class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.editRiskAssessmentModal('twitter', $index)">Edit</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.deleteRiskAssessmentModal('twitter',$index)">Delete All</button>
+              <h4>Risk Assessment</h4>
+            </div>
+            <div ng-repeat="item in item.riskAssessments" class="risk-container">
+              <span class="risk">{{item.name}}</span>
+            </div>
+          </div>
         </div>
+
+
 
         <button class="btn btn-primary" ng-click="m.openConfusionTwitterModal()">Add confusion account</button>
       </div>
@@ -235,8 +319,8 @@
               </div>
 
               <div class="container-fluid">
-                <label ng-show="m.report.reportType=='Professional'">Comments</label> <textarea ng-show="m.report.reportType=='Professional'" class="text-control" ng-model="item.comments"></textarea>
-                <button class="btn btn-success btn-green pull-right" ng-show="item.riskAssessments.length == 0 || item.riskAssessments.length == null" ng-click="item.openRiskAssessment = !item.openRiskAssessment">Add Risk Assessment</button>
+                <label ng-show="m.report.reportType=='Professional'">Comments</label> <textarea class="form-control" ng-show="m.report.reportType=='Professional'" class="text-control" ng-model="item.comments"></textarea>
+                <button class="btn btn-success btn-green pull-right" ng-show="item.riskAssessments.length == 0 || item.riskAssessments.length == null" ng-click="m.addRiskAssessmentModal('tweet', $index)">Add Risk Assessment</button>
 
               </div>
 
@@ -244,12 +328,14 @@
 
 
           </div>
-
-          <div class="risk-assessment" ng-show="item.openRiskAssessment || !(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
+          <div class="risk-assessment" ng-if="!(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
             <div class="risk-header">
-              <button class="btn btn-white btn-sm pull-right margin-left-10">Save</button>
-              <button class="btn btn-white btn-sm pull-right margin-left-10">Cancel</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.editRiskAssessmentModal('tweet', $index)">Edit</button>
+              <button class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.deleteRiskAssessmentModal('tweet',$index)">Delete All</button>
               <h4>Risk Assessment</h4>
+            </div>
+            <div ng-repeat="item in item.riskAssessments" class="risk-container">
+              <span class="risk">{{item.name}}</span>
             </div>
           </div>
         </div>
@@ -272,11 +358,15 @@
               </label>
           </div>
 
-          <div class="risk-assessment" ng-show="item.selected || !(item.riskAssessments.length == 0 || item.riskAssessments.length == null)">
+          <div class="risk-assessment" ng-if="item.selected">
             <div class="risk-header">
-              <button class="btn btn-white btn-sm pull-right margin-left-10">Save</button>
-              <button class="btn btn-white btn-sm pull-right margin-left-10">Cancel</button>
+              <button ng-if="(item.riskAssessments.length == 0 || item.riskAssessments.length == null)" class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.addRiskAssessmentModal('facebook', $index)">Add</button>
+              <button ng-if="!(item.riskAssessments.length == 0 || item.riskAssessments.length == null)" class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.editRiskAssessmentModal('facebook', $index)">Edit</button>
+              <button ng-if="!(item.riskAssessments.length == 0 || item.riskAssessments.length == null)" class="btn btn-white btn-sm pull-right margin-left-10" ng-click="m.deleteRiskAssessmentModal('facebook',$index)">Delete All</button>
               <h4>Risk Assessment</h4>
+            </div>
+            <div ng-repeat="item in item.riskAssessments" class="risk-container">
+              <span class="risk">{{item.name}}</span>
             </div>
           </div>
         </div>
@@ -360,7 +450,7 @@
 
         <div class="white-block well">
           <div class="container-fluid">
-            <label>Overall Alignment</label> <textarea class="form-control" ng-model="m.report.userReportProfessionalAlignment.overrideAlignmentDetails"></textarea>
+            <label>Overall Alignment</label> <textarea class="form-control" class="form-control" ng-model="m.report.userReportProfessionalAlignment.overrideAlignmentDetails"></textarea>
 
           </div>
         </div>
@@ -375,7 +465,7 @@
           </label>
             </div>
 
-            <textarea class="form-control" ng-model="m.report.userReportProfessionalAlignment.recommedationsDetails" ng-show="m.report.userReportProfessionalAlignment.recommedationsSelected"></textarea>
+            <textarea class="form-control" class="form-control" ng-model="m.report.userReportProfessionalAlignment.recommedationsDetails" ng-show="m.report.userReportProfessionalAlignment.recommedationsSelected"></textarea>
 
           </div>
         </div>
@@ -464,18 +554,169 @@
     <h3 class="modal-title">Add Confusion Accounts</h3>
   </div>
   <div class="modal-body">
-    <input class="form-control" ng-model="m.twitterConfusionSearchInput" placeholder="Search for confusion accounts..." />
-    <!-- <ul>
-      <li ng-repeat="item in m.googleImageSearchResultsModal.items">
+    <input class="form-control" ng-model="m.twitterConfusionSearchInput" ng-model-options="{debounce:500}" ng-change="m.populateTwitterSearchModal()" placeholder="Search for confusion accounts..." />
+    <div class="white-block" ng-repeat="item in m.twitterResultsModal">
+      <div class="container-fluid twitter">
+        <div class="col-sm-1">
+
+          <input type="checkbox" ng-model="item.selected">
+        </div>
+        <div class="col-sm-4">
+          <img ng-src="{{item.profileImageUrl}}" />
+        </div>
+        <div class="col-sm-7">
+          <div class="bio">
+
+            <label>Bio</label>
+            <p>{{item.description}}</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-success btn-green" ng-click="m.addTwitterSearch()">Add Confusion account</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="addRiskAssessmentModal.html">
+  <div class="modal-header">
+    <button type="button pull-right" class="close" data-dismiss="modal" aria-hidden="true" ng-click="m.cancel()"><i class="fa fa-times-circle"></i></button>
+    <h3 class="modal-title">Add Risk Assessment</h3>
+  </div>
+  <div class="modal-body risk-assessment-modal">
+    <select ng-model="m.selectedRiskAssessment" ng-options="assessment.value as assessment.value for assessment in m.GetAssessmentFor"></select>
+
+    <div class="light-gray-background" ng-if="m.selectedRiskAssessment">
 
 
-        <input type="checkbox" ng-model="item.selected">
+      <!-- {{m.ListAssessments}} -->
+      <div ng-repeat="risk in m.ListAssessments" ng-if="(risk.privacySetting.selected || risk.dataSecurity.selected|| risk.location.selected ||risk.identityConfusion.selected||risk.personalInformation.selected || risk.socialNetwork.selected)">
+        <div class="white-block">
+          <div class="header" ng-click="risk.selected = !risk.selected">
+            <i class="fa fa-square-o" ng-if="!risk.selected"></i> <i class="fa fa-check-square" ng-if="risk.selected"></i> {{risk.name}}
+          </div>
 
-        <h1>{{item.title}} </h1>
-        <a href="{{item.link}}">{{item.link}}</a>
-        <img ng-src="{{item.link}}" />
 
-      </li>
-    </ul> -->
+          <div class="container-fluid main-content" ng-if="risk.selected">
+            <!-- {{risk}} -->
+
+            <div class="row" ng-if="risk.privacySetting.selected">
+
+              <div class="col-md-12">
+                <label>Privacy Settings</label>
+              </div>
+              <div class="col-md-6">
+                <textarea class="form-control" ng-model="risk.privacySetting.note" ng-disabled="!risk.privacySetting.selected" placeholder="Add note..."></textarea>
+              </div>
+              <div class="col-md-6">
+                <div class="btn-group">
+                  <label class="btn btn-primary" ng-model="risk.privacySetting.riskLevel" ng-repeat="riskType in m.GetAssessmentPointRiskLevels | limitTo: (1 - m.GetAssessmentPointRiskLevels.length) |orderBy:'':true" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row" ng-if="risk.dataSecurity.selected">
+              <div class="col-md-12">
+                <label>Data Security</label>
+              </div>
+              <div class="col-md-6">
+                <textarea class="form-control" ng-model="risk.dataSecurity.note" ng-disabled="!risk.dataSecurity.selected" placeholder="Add note..."></textarea>
+              </div>
+              <div class="col-md-6">
+                <div class="btn-group">
+                  <label class="btn btn-primary" ng-model="risk.dataSecurity.riskLevel" ng-repeat="riskType in m.GetAssessmentPointRiskLevels | limitTo: (1 - m.GetAssessmentPointRiskLevels.length) |orderBy:'':true" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row" ng-if="risk.location.selected">
+              <div class="col-md-12">
+                <label>
+                      Location
+                    </label>
+              </div>
+              <div class="col-md-6">
+                <textarea class="form-control" ng-model="risk.location.note" ng-disabled="!risk.location.selected" placeholder="Add note..."></textarea>
+
+              </div>
+              <div class="col-md-6">
+
+                <div class="btn-group">
+                  <label class="btn btn-primary" ng-model="risk.location.riskLevel" ng-disabled="!risk.location.selected" ng-repeat="riskType in m.GetAssessmentPointRiskLevels | limitTo: (1 - m.GetAssessmentPointRiskLevels.length) |orderBy:'':true" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+                </div>
+                <div class="btn-group">
+                  <label class="btn btn-primary" ng-model="risk.location.assessmentPointType" ng-disabled="!risk.location.selected" ng-repeat="riskType in m.GetAssessmentPointType | limitTo: (1 - m.GetAssessmentPointType.length) |orderBy:'':true" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+                </div>
+              </div>
+
+            </div>
+
+
+
+            <div class="row" ng-if="risk.identityConfusion.selected">
+              <div class="col-md-12">
+                <label>
+                      Identity Confusion
+                    </label>
+              </div>
+
+              <div class="col-md-6">
+                <textarea class="form-control" ng-model="risk.identityConfusion.note" ng-disabled="!risk.identityConfusion.selected" placeholder="Add note..."></textarea>
+              </div>
+              <div class="col-md-6">
+                <div class="btn-group">
+                  <label class="btn btn-primary" ng-model="risk.identityConfusion.riskLevel" ng-repeat="riskType in m.GetAssessmentPointRiskLevels | limitTo: (1 - m.GetAssessmentPointRiskLevels.length) |orderBy:'':true" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+                </div>
+              </div>
+
+            </div>
+
+
+
+            <div class="row" ng-if="risk.personalInformation.selected">
+              <div class="col-md-12">
+                <label>
+                      Personal Information
+                    </label>
+              </div>
+              <div class="col-md-6">
+                <textarea class="form-control" ng-disabled="!risk.personalInformation.selected" placeholder="Add note..."></textarea>
+              </div>
+              <div class="col-md-6">
+
+                <div class="btn-group">
+                  <label class="btn btn-primary" ng-model="risk.personalInformation.riskLevel" ng-repeat="riskType in m.GetAssessmentPointRiskLevels | limitTo: (1 - m.GetAssessmentPointRiskLevels.length) |orderBy:'':true" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row" ng-if="risk.socialNetwork.selected">
+              <div class="col-md-12">
+
+                <label> Social Network</label>
+              </div>
+              <div class="col-md-6">
+                <textarea class="form-control" ng-model="risk.socialNetwork.note" ng-disabled="!risk.socialNetwork.selected" placeholder="Add note..."></textarea>
+
+              </div>
+              <div class="col-md-6">
+                <div class="btn-group">
+                  <label class="btn btn-primary" ng-model="risk.socialNetwork.riskLevel" ng-disabled="!risk.socialNetwork.selected" ng-repeat="riskType in m.GetAssessmentPointRiskLevels| limitTo: (1 - m.GetAssessmentPointRiskLevels.length) |orderBy:'':true" uib-btn-radio="'{{riskType.value}}'">{{riskType.value}}</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <buton class="btn btn-success btn-lg" ng-click="m.saveRiskData(m.type, m.index)">Save Assessment</buton>
   </div>
 </script>
