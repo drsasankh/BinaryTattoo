@@ -25,7 +25,7 @@ BinaryTattooApp.controller('mainController', function mainController($scope, loc
 });
 
 BinaryTattooApp.run(function($rootScope, localStorageService, $location) {
-  $rootScope.UATurl = "http://sangeet302.ddns.net/api/";
+  $rootScope.UATurl = "http://108.162.137.122/api/";
 
   $rootScope.ageGroup = [
     'Less than 13', '13-17', '18-24', '25-34', '35-44', '45-64', '65+'

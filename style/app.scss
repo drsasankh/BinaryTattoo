@@ -1,3 +1,4 @@
+// base.scss
 $header-color: #1175bc;
 $white: #fff;
 $grey: #e6e6e6;
@@ -14,6 +15,8 @@ html {
   color: #fff;
   font-family: 'Roboto', sans-serif !important;
   margin-bottom: 50px;
+  letter-spacing: 1px;
+  font-weight: 300;
 }
 
 .logged-in-background {
@@ -962,3 +965,4 @@ textarea {
     font-size: 14px;
   }
 }
+@import 'report-page';

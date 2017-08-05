@@ -1,5 +1,4 @@
-<div class="report-page">
-  <ng-include src="'templates/header.html'"></ng-include>
+<div class="view-report-page">
 
   <!-- <div class="row blue-row">
 
@@ -13,8 +12,437 @@
 
 
   </div> -->
-{{m.report}}
+
+  <div class="container">
+    <!-- <ng-include src="'templates/header.html'"></ng-include> -->
+    <!--
+{{m.report}} -->
+    <div class="container-fluid">
+      <div class="row head">
+        <div class="col-sm-6">
+          <img src="img/logo.png" />
+        </div>
+        <div class="col-sm-6">
+          <div class="white-block">
+            <div class="header">
+              Summary Report Prepared For
+            </div>
+            <div class="content">
+
+              {{m.report.firstName}} {{m.report.lastName}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row summary-title">
+        <div class="container-fluid">
 
 
+          <div class="title">
+            <div class="subtext">Generated on {{m.report.dateRequested | date}}</div>
+            <h1>Overview</h1>
+          </div>
+          <p>
+            This Summary report will give you an overview of your public online profile. It includes an evaluation of privacy settings as well as the safety of your personal data. Our algorithm rates your data to provide you with an understanding of what is available
+            and how to change what you don't like. We based our results on the following criteria:
+          </p>
+        </div>
+      </div>
+      <div class="row summary-table">
+        <div class="container-fluid">
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="critical-issues">Critical Issues</th>
+                <th class="potential-risks">Potential Risks</th>
+                <th class="highlights">Highlights</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Privacy Settings</th>
+                <td class="critical-issues">
+                  {{m.overviewNumbers.privacySetting[0]}}
+                </td>
+                <td class="potential-risks">
+                  {{m.overviewNumbers.privacySetting[1]}}
+                </td>
+                <td class="highlights">
+                  {{m.overviewNumbers.privacySetting[2]}}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Personal Information</th>
+                <td class="critical-issues">
+                  {{m.overviewNumbers.personalInformation[0]}}
+                </td>
+                <td class="potential-risks">
+                  {{m.overviewNumbers.personalInformation[1]}}
+                </td>
+                <td class="highlights">
+                  {{m.overviewNumbers.personalInformation[2]}}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Data Security</th>
+                <td class="critical-issues">
+                  {{m.overviewNumbers.dataSecurity[0]}}
+                </td>
+                <td class="potential-risks">
+                  {{m.overviewNumbers.dataSecurity[1]}}
+                </td>
+                <td class="highlights">
+                  {{m.overviewNumbers.dataSecurity[2]}}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Indentity Confusion</th>
+                <td class="critical-issues">
+                  {{m.overviewNumbers.identityConfusion[0]}}
+                </td>
+                <td class="potential-risks">
+                  {{m.overviewNumbers.identityConfusion[1]}}
+                </td>
+                <td class="highlights">
+                  {{m.overviewNumbers.identityConfusion[2]}}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Location Information</th>
+                <td class="critical-issues">
+                  {{m.overviewNumbers.location[0]}}
+                </td>
+                <td class="potential-risks">
+                  {{m.overviewNumbers.location[1]}}
+                </td>
+                <td class="highlights">
+                  {{m.overviewNumbers.location[2]}}
+                </td>
+              </tr>
+              <tr ng-if="false">
+                <th scope="row">Public Perception</th>
+                <td class="critical-issues">
+                  {{m.overviewNumbers.publicPerception[0]}}
+                </td>
+                <td class="potential-risks">
+                  {{m.overviewNumbers.publicPerception[1]}}
+                </td>
+                <td class="highlights">
+                  {{m.overviewNumbers.publicPerception[2]}}
+                </td>
+              </tr>
+              <tr ng-if="false">
+                <th scope="row">Professional Alignment</th>
+                <td class="critical-issues">
+                  {{m.overviewNumbers.professionalAlignment[0]}}
+                </td>
+                <td class="potential-risks">
+                  {{m.overviewNumbers.professionalAlignment[1]}}
+                </td>
+                <td class="highlights">
+                  {{m.overviewNumbers.professionalAlignment[2]}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row disabled">
+        <div class="container-fluid">
+          <div class="col-md-4 disabled-sidebar">
+            <h1>PUBLIC PERCEPTION</h1>
+            <h1>PROFESSIONAL ALIGNMENT</h1>
+          </div>
+          <div class="col-md-8">
+            <p>
+              Learn how your personal network impacts your security ratings, see how the public perceives your profile, or evaluate a future employee by upgrading to a detailed or professional report.
+            </p>
+            <button class="btn btn-success">Upgrade Search</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container-fluid">
+          <h1>Profile Pictures</h1>
 
+          <div class="twitter-profile">
+            <!-- {{m.report.userReportTwitterUserSearchItems}}
+          {{m.report.userReportTwitterUserSearchItems[0].userTweet.profileImageUrl}} -->
+            <i class="fa fa-twitter"></i>
+            <img ng-src="{{m.report.userReportTwitterUserSearchItems[0].userTweet.profileImageUrl}}" />
+          </div>
+        </div>
+      </div>
+      <div class="row google-search-results">
+        <div class="container-fluid">
+          <h1>Search Results</h1>
+          <p>
+            These results are what can be found when searching your name in combination with details about your life on common search engines like Google
+          </p>
+          <div class="link-container">
+
+            <div class="link" ng-repeat="results in m.report.userReportGoogleSearchItems">
+              <span class="counter">{{$index + 1}}</span>
+              <h1>{{results.googleImage.title}}</h1>
+              <h2><a href="{{results.googleImage.link}}" target="_blank">{{results.googleImage.link}}</a></h2>
+              <p>{{results.googleImage.snippet}}</p>
+              <!-- {{$index+1}} {{results.googleImage.title}} {{results.googleImage.link}} -->
+              <div class="clearfix">
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="row blue-background google-image-search-results">
+
+        <div class="container-fluid">
+          <h1>Image Search</h1>
+          <p>
+
+            These are the top image results that can be found when searching your name in combination with details about your life on common search engines like Google
+          </p>
+          <div ng-repeat="results in m.report.userReportGoogleImageSearchItems">
+            <img ng-src="{{results.googleImage.link}}" />
+
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="container-fluid privacy-settings">
+          <div class="col-md-6">
+            <h1>Privacy Settings</h1>
+            <p>
+              Privacy Settings determine the audience of posts, tweets, images, and status updates. High privacy settings allow users to share different items to different people. Open or low privacy settings expose user data to anyone wanting to look.
+            </p>
+
+          </div>
+          <div class="col-md-6">
+            <div class="privacy-block">
+              <div class="floating-icons">
+                <i class="fa fa-twitter forward"></i>
+                <i class="fa fa-facebook base"></i>
+                <i class="fa fa-facebook base"></i>
+              </div>
+              <div class="privacy-indicators">
+                <div class="lock pull-left">
+                  <i class="fa fa-lock"></i> Private
+                </div>
+
+                <div class="unlock pull-right">
+                  <i class="fa fa-unlock"></i> Open
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row">
+
+        not implemented
+      </div> -->
+      <div class="row disabled">
+        <div class="container-fluid">
+          <div class="col-md-12">
+
+            <h1>Did you know?</h1>
+            <p>
+              Your online privacy is only as good as your friends settings. Want to understand how your friends settings impact your privacy and safety? Upgrade to the Detailed Report!
+            </p>
+            <button class="btn btn-success">Upgrade Search</button>
+
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+
+        <div class="row personal-safety">
+          <h1>DATA AND PERSONAL SAFETY</h1>
+          <p>
+            Data says a lot about the user. Depending on what is shared, the user could be putting themselves at risk for identity theft, scams, malware, or stalking. It is important not to give away more than intended.
+          </p>
+          <div class="col-md-8 col-md-push-2">
+
+            <div class="container-fluid">
+              <div class="row personal-safety">
+                <div class="row">
+                  <div class="col-md-4">
+                    <h2>Data Security</h2>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="block" ng-repeat="block in m.blocks" >
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <h2>Personal Information</h2>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="block" ng-repeat="block in m.blocks">
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <h2>Social Network</h2>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="block" ng-repeat="block in m.blocks">
+                    </div>
+
+                  </div>
+
+                </div>
+                <div class="row privacy-indicators">
+                  <div class="col-md-4">
+
+                  </div>
+                  <div class="col-md-8">
+                    <div class="lock pull-left">
+
+                      <i class="fa fa-lock"></i> Secure
+                    </div>
+                    <div class="unlock pull-right">
+                      <i class="fa fa-unlock"></i> Open
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <hr class="clear" />
+      <div class="row public-perception disabled">
+        <div class="container-fluid">
+          <div class="col-md-5">
+            <h1>PUBLIC PERCEPTION</h1>
+            <p>
+              Each piece of pubic data can be assembled to create a bigger picture of an individual. A positive or even neutral persona is a successful one. Negative personas can leave the user at risk of losing opportunties. Polarizing personas, though sometimes justified,
+              can also cost the user if they offend someone.
+            </p>
+            <button class="btn btn-success">Upgrade Detailed Search</button>
+          </div>
+          <div class="col-md-7">
+            <div class="public-perception-table">
+              <table class="table">
+
+                <tr class="top-chart">
+                  <td>
+                    <div class="block positive-block">
+
+                    </div>
+                  </td>
+                  <td>
+
+                    <div class="block neutral-block">
+
+                    </div>
+                  </td>
+                  <td>
+
+                    <div class="block polarizing-block">
+
+                    </div>
+                  </td>
+                  <td>
+                    <div class="block negative-block">
+
+                    </div>
+                  </td>
+                </tr>
+                <tr class="bottom-chart">
+                  <td>
+                    Positive
+                  </td>
+                  <td>
+                    Neutral
+                  </td>
+                  <td>
+                    Polarizing
+                  </td>
+                  <td>
+                    Negative
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="clear" />
+      <div class="row professional-alignment disabled">
+
+        <div class="container-fluid">
+          <div class="col-md-5">
+            <h1>PROFESSIONAL ALIGNMENT</h1>
+            <p>
+              A professional persona can vary depending on occupation but must always meets the criteria of the employer. We evaluate users as the employer or institution would for enrolement, a potential position, or promotion.
+            </p>
+
+            <button class="btn btn-success">Upgrade Professional Search</button>
+          </div>
+          <div class="col-md-6">
+            <div class="public-perception-table">
+              <table class="table">
+
+                <tr class="top-chart">
+                  <td>
+                    <div class="block positive-block">
+
+                    </div>
+                  </td>
+                  <td>
+
+                    <div class="block neutral-block">
+
+                    </div>
+                  </td>
+                  <td>
+
+                    <div class="block polarizing-block">
+
+                    </div>
+                  </td>
+
+                </tr>
+                <tr class="bottom-chart">
+                  <td>
+                    Aligned
+                  </td>
+                  <td>
+                    Neutral
+                  </td>
+
+                  <td>
+                    Negative
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row bottom">
+    <img src="img/logo.png" />
+    </div>
+
+  </div>
 </div>
