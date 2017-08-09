@@ -161,4 +161,4 @@ BinaryTattooApp.directive('uibModalWindow', function(){
                   });
           }
       };
-   });
+   }); 
