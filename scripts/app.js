@@ -1,4 +1,4 @@
-var BinaryTattooApp = angular.module('BinaryTattooApp', ['ngRoute', 'LocalStorageModule', 'ui.bootstrap']);
+var BinaryTattooApp = angular.module('BinaryTattooApp', ['ngRoute', 'LocalStorageModule', 'ui.bootstrap', 'blockUI']);
 
 BinaryTattooApp.controller('mainController', function mainController($scope, localStorageService, $location, $route) {
   $scope.m = {};
