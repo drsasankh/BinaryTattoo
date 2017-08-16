@@ -165,15 +165,15 @@ BinaryTattooApp.directive('uibModalWindow', function(){
 
 //Configuring Block UI Not to block the whole page automatically on every ajax call
 BinaryTattooApp.config(function (blockUIConfig, $httpProvider) {
-    $httpProvider.interceptors.push(function ($timeout) {
-        return {
-            "response": function (response) {
-                return $timeout(function () {
-                    return response;
-                }, 2500);
-            }
-        };
-    });
+    //$httpProvider.interceptors.push(function ($timeout) {
+    //    return {
+    //        "response": function (response) {
+    //            return $timeout(function () {
+    //                return response;
+    //            }, 2500);
+    //        }
+    //    };
+    //});
 
 
     //blockUIConfig.blockBrowserNavigation = true;
