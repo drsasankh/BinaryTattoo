@@ -67,7 +67,7 @@
         Highlights
       </div>
     </div>
-    <div class="col-xs-2">
+    <div class="col-xs-2" block-ui/>
       <button class="btn btn-primary col-xs-12 btn-white pull-right" ng-click="m.requestNewReport();">New Report</button>
 
     </div>
@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      <div class="col-xs-2">
+      <div class="col-xs-2" block-ui="requestreport">
         <!-- <button class="btn btn-success pull-right col-xs-12">Buy Now</button> -->
         <button class="btn btn-success pull-right" ng-click="m.requestReport(m.reportType)" ng-show="m.reportType"><span ng-if="m.reportType == 'Standard'">$19.99</span><span ng-if="m.reportType == 'Detailed'">$99.99</span><span ng-if="m.reportType == 'Professional'">$499.99</span> Buy Now</button>
 
@@ -320,7 +320,7 @@
     </div>
 
     <div class="row light-grey-background" ng-show="m.reportType != null">
-      <div class="container-fluid">
+      <div class="container-fluid" block-ui="requestreport">
         <button class="btn btn-success btn-lg pull-right" ng-click="m.requestReport(m.reportType)"><span ng-if="m.reportType == 'Standard'">$19.99</span><span ng-if="m.reportType == 'Detailed'">$99.99</span><span ng-if="m.reportType == 'Professional'">$499.99</span> Buy Now</button>
 
       </div>
@@ -331,8 +331,9 @@
     <!-- {{report}} -->
     <div class="row white-row" ng-click="report.openReport = !report.openReport">
       <div class="col-xs-10">
-        <div class="col-xs-2 col-md-2">
-          <i class="fa fa-trash trash-can" ng-click="m.deleteReport(report.reportId); $event.stopPropagation();"></i> {{report.firstName}} {{report.lastName}}
+        <div class="col-xs-2 col-md-2" block-ui="deletereport">
+          <i class="fa fa-trash trash-can" ng-click="m.deleteReport(report.reportId); $event.stopPropagation
+             ;"></i> {{report.firstName}} {{report.lastName}}
         </div>
         <div class="col-xs-2 col-md-2">
           {{report.reportType}}

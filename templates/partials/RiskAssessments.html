@@ -6,7 +6,7 @@
         <select ng-model="m.selectedGetAssessmentFor" ng-options="assessment.value as assessment.value for assessment in m.GetAssessmentFor"></select>
 
         <h1>Risk Assessment</h1>
-        <div class="green-background" ng-if="m.selectedGetAssessmentFor">
+        <div class="green-background" ng-if="m.selectedGetAssessmentFor" block-ui="addRiskAssessment">
           <button class="btn btn-success btn-sm" ng-click="m.addRiskAssessment()"><i class="fa fa-plus-circle"></i>Add Risk Assessment</button>
         </div>
         <!-- {{m.ListAssessments}} -->
@@ -16,7 +16,7 @@
             <li ng-repeat="risk in m.ListAssessments" ng-click="m.selectedRiskAssessment = risk.assessmentId" ng-class="{active: m.selectedRiskAssessment == risk.assessmentId}">
               <div class="white-block">
                 {{risk.name || "Missing name"}}
-                <button class="btn" ng-click="m.deleteRiskAssessment( risk.assessmentId)"><i class="fa fa-trash"></i></button>
+                <button class="btn" ng-click="m.deleteRiskAssessment(risk.assessmentId)"><i class="fa fa-trash"></i></button>
               </div>
             </li>
           </ul>

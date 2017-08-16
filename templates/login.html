@@ -9,7 +9,7 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-xs-push-1 login col-xs-4">
+      <div class="col-xs-push-1 login col-xs-4" block-ui="login">
         <form>
           <h2>Login to your account</h2>
           <input class="form-control" placeholder="EMAIL ADDRESS" ng-model="m.email" type="text" />
@@ -22,9 +22,7 @@
         </form>
 
       </div>
-      <div class="col-xs-push-3 col-xs-4">
-
-
+      <div class="col-xs-push-3 col-xs-4" block-ui="register">
         <h2>Create an account</h2>
         <form>
           <div class="alert-danger" ng-repeat="error in error">

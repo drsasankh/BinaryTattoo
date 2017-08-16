@@ -161,5 +161,33 @@ BinaryTattooApp.directive('uibModalWindow', function(){
                   });
           }
       };
-   }); 
+    }); 
+
+//Configuring Block UI Not to block the whole page automatically on every ajax call
+BinaryTattooApp.config(function (blockUIConfig, $httpProvider) {
+    $httpProvider.interceptors.push(function ($timeout) {
+        return {
+            "response": function (response) {
+                return $timeout(function () {
+                    return response;
+                }, 2500);
+            }
+        };
+    });
+
+
+    //blockUIConfig.blockBrowserNavigation = true;
+    //blockUIConfig.autoBlock = true;
+    blockUIConfig.autoInjectBodyBlock = false;
+    // Change the default overlay message
+    blockUIConfig.message = 'In Progress!';
+    //blockUIConfig.delay = 10;
+
+    // Disable automatically blocking of the user interface
+    //blockUIConfig.autoBlock = true;
+
+    //blockUIConfig.autoInjectBodyBlock = false;
+    //blockUIConfig.resetOnException = false;
+
+});
 //test
