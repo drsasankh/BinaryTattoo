@@ -3,6 +3,9 @@ BinaryTattooApp.controller('riskAssessmentsController', function riskAssessments
     $scope.m.selectedGetAssessmentFor = null;
     $scope.m.assessment = {}
 
+    var myBlockUI = blockUI.instances.get('getriskassessment');
+    myBlockUI.start();
+
     $http.get($rootScope.UATurl + "DomainValues/GetAssessmentFor").then(
         function successCallback(response) {
             console.log(response.data)
@@ -28,15 +31,20 @@ BinaryTattooApp.controller('riskAssessmentsController', function riskAssessments
         function erroCallback(response) {
             console.log(response.data)
         })
-
+    myBlockUI.stop();
 
     $scope.m.getAllAssessments = function () {
+        
+        var myBlockUI = blockUI.instances.get('getriskassessment');
+        myBlockUI.start();
         $http.get($rootScope.UATurl + "RiskAssessmentSetting/GetAll/" + $scope.m.selectedGetAssessmentFor).then(
             function successCallback(response) {
                 //  console.log("all assessments" + response.data)
+                myBlockUI.stop();
                 $scope.m.ListAssessments = response.data;
             },
             function erroCallback(response) {
+                myBlockUI.stop();
                 console.log(response.data)
             })
     }

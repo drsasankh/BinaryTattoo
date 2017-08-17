@@ -12,13 +12,18 @@ BinaryTattooApp.controller('userAccountsController', function userAccountsContro
 
         })
     $scope.m.getUserAccount = function () {
+        
+        var myBlockUI = blockUI.instances.get('getuseraccounts');
+        myBlockUI.start();
         $http.get($rootScope.UATurl + "UserAccount/GetAll").then(
             function successCallback(response) {
+                myBlockUI.stop();
                 console.log(response.data)
                 $scope.m.users = response.data;
 
             },
             function erroCallback(response) {
+                myBlockUI.stop();
                 console.log(response.data)
 
             })
