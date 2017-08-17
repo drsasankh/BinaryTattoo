@@ -1,4 +1,4 @@
-BinaryTattooApp.controller('homeController', function homeController($scope, $http, $rootScope, $location, localStorageService) {
+BinaryTattooApp.controller('homeController', function homeController($scope, $http, $rootScope, $location, localStorageService, blockUI) {
     $scope.m = {};
     $scope.m.newReport = false;
     $scope.m.reportType = null;

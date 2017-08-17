@@ -1,4 +1,4 @@
-BinaryTattooApp.controller('usersController', function usersController($scope,$rootScope,$http) {
+BinaryTattooApp.controller('usersController', function usersController($scope, $rootScope, $http, blockUI) {
   $scope.m = {};
 
   $scope.m.getUserAccount = function() {

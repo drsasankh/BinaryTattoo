@@ -1,4 +1,4 @@
-BinaryTattooApp.controller('userAccountsController', function userAccountsController($scope, $http, $rootScope) {
+BinaryTattooApp.controller('userAccountsController', function userAccountsController($scope, $http, $rootScope, blockUI) {
     $scope.m = {};
 
     $http.get($rootScope.UATurl + "DomainValues/GetUserRoles").then(

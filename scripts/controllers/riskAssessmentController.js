@@ -1,4 +1,4 @@
-BinaryTattooApp.controller('riskAssessmentsController', function riskAssessmentsController($scope, $rootScope, $http, $debounce) {
+BinaryTattooApp.controller('riskAssessmentsController', function riskAssessmentsController($scope, $rootScope, $http, $debounce, blockUI) {
     $scope.m = {};
     $scope.m.selectedGetAssessmentFor = null;
     $scope.m.assessment = {}

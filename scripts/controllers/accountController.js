@@ -1,4 +1,4 @@
-BinaryTattooApp.controller('accountController', function accountController($scope,$rootScope,$http) {
+BinaryTattooApp.controller('accountController', function accountController($scope, $rootScope, $http, blockUI) {
     $scope.uib = {};
     $scope.uib.save = /(UserAccount\/UpdateProfile)/;
     $scope.m = {};

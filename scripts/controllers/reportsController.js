@@ -1,4 +1,4 @@
-BinaryTattooApp.controller('pendingReportsController', function pendingReportsController($scope, $http, $rootScope) {
+BinaryTattooApp.controller('pendingReportsController', function pendingReportsController($scope, $http, $rootScope, blockUI) {
   $scope.m = {};
 
   $scope.m.getReport = function() {
@@ -8,14 +8,18 @@ BinaryTattooApp.controller('pendingReportsController', function pendingReportsCo
       "sortedBy": "string",
       "sortOrder": "string",
       "showAll": true
-    }
+      }
+    var myBlockUI = blockUI.instances.get('getpendingreports');
+    myBlockUI.start();
     $http.post($rootScope.UATurl + "UserReport/GetPendingReports", params).then(
       function successCallback(response) {
         //console.log(response.data)
+          myBlockUI.stop();
         $scope.m.reports = response.data;
 
       },
       function erroCallback(response) {
+          myBlockUI.stop();
         console.log(response.data)
 
       })
@@ -31,7 +35,7 @@ BinaryTattooApp.controller('pendingReportsController', function pendingReportsCo
 });
 
 
-BinaryTattooApp.controller('publishedReportsController', function publishedReportsController($scope, $http, $rootScope) {
+BinaryTattooApp.controller('publishedReportsController', function publishedReportsController($scope, $http, $rootScope, blockUI) {
   $scope.m = {};
 
   $scope.m.getReport = function() {
