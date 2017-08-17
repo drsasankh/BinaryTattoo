@@ -1,61 +1,63 @@
-<div class="container-fluid sub-section"  ng-controller="publishedReportsController">
-  <div class="row blue-row">
+<div class="container-fluid sub-section" ng-controller="publishedReportsController" block-ui="getpublishedreports">
+    <div class="row blue-row">
 
-    <div class="col-xs-10">
-      <div class="col-xs-3">
-        Search Name
-      </div>
-      <div class="col-xs-2">
-        Search Type
-      </div>
+        <div class="col-xs-10">
+            <div class="col-xs-3">
+                Search Name
+            </div>
+            <div class="col-xs-2">
+                Search Type
+            </div>
 
-      <div class="col-xs-2">
-        Search Date
-      </div>
-      <div class="col-xs-1">
-        Critical Issues
-      </div>
-      <div class="col-xs-1">
-        Potential Risks
-      </div>
-      <div class="col-xs-1">
-        Highlights
-      </div>
-    </div>
-    <div class="col-xs-2">
-      <!-- <button class="btn btn-primary col-xs-12 btn-white pull-right">New Report</button> -->
+            <div class="col-xs-2">
+                Search Date
+            </div>
+            <div class="col-xs-1">
+                Critical Issues
+            </div>
+            <div class="col-xs-1">
+                Potential Risks
+            </div>
+            <div class="col-xs-1">
+                Highlights
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <!-- <button class="btn btn-primary col-xs-12 btn-white pull-right">New Report</button> -->
 
-    </div>
-  </div>
-
-<!-- ng-click="report.openReport = !report.openReport"? -->
-  <div class="submitted-report" ng-repeat="report in m.reports">
-    <div class="row white-row" >{{}}
-      <div class="col-xs-10">
-        <div class="col-xs-3 col-md-3">
-          <i class="fa fa-trash trash-can"></i> {{report.firstName}} {{report.lastName}}
         </div>
-        <div class="col-xs-2 col-md-2">
-        {{report.reportType}}
-        </div>
-        <div class="col-xs-2 col-md-2">
-          -
-        </div>
-        <div class="col-xs-1 col-md-1">
-          -
-        </div>
-        <div class="col-xs-1 col-md-1">
-          -
-        </div>
-        <div class="col-xs-1 col-md-1">
-          -
-        </div>
-      </div>
-      <div class="col-xs-2">
-
-        <button class="btn btn-primary pull-right col-xs-12" ng-click="goto('/view-report/' + report.reportId)">View Report</button>
-
-      </div>
     </div>
 
+    <!-- ng-click="report.openReport = !report.openReport"? -->
+    <div class="submitted-report" ng-repeat="report in m.reports">
+        <div class="row white-row">
+            {{}}
+            <div class="col-xs-10">
+                <div class="col-xs-3 col-md-3">
+                    <i class="fa fa-trash trash-can"></i> {{report.firstName}} {{report.lastName}}
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    {{report.reportType}}
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    -
+                </div>
+                <div class="col-xs-1 col-md-1">
+                    -
+                </div>
+                <div class="col-xs-1 col-md-1">
+                    -
+                </div>
+                <div class="col-xs-1 col-md-1">
+                    -
+                </div>
+            </div>
+            <div class="col-xs-2">
+
+                <button class="btn btn-primary pull-right col-xs-12" ng-click="goto('/view-report/' + report.reportId)">View Report</button>
+
+            </div>
+        </div>
+
+    </div>
 </div>

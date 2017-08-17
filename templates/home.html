@@ -1,512 +1,529 @@
 <ng-include src="'templates/header.html'"></ng-include>
 
 <div class="container-fluid">
-  <div class="row blue-row" ng-if="false">
-    <div class="col-md-6">
-      <h1>News and Updates</h1>
-      <p>
-        Our extensive expertise allows us to search and uncover far beyond a search engine, uncovering personal information from social networks and other websites.
-      </p>
-    </div>
-    <div class="col-md-2">
-      <div class="news-item">
-        <div class="news-content">
-          <p>
-            Facebook makes a number of new security features
-          </p>
-          <a href="">See more...</a>
+    <div class="row blue-row" ng-if="false">
+        <div class="col-md-6">
+            <h1>News and Updates</h1>
+            <p>
+                Our extensive expertise allows us to search and uncover far beyond a search engine, uncovering personal information from social networks and other websites.
+            </p>
         </div>
-      </div>
-    </div>
-    <div class="col-md-2">
-
-      <div class="news-item">
-        <div class="news-content">
-          <p>
-            Facebook makes a number of new security features
-          </p>
-          <a href="">See more...</a>
+        <div class="col-md-2">
+            <div class="news-item">
+                <div class="news-content">
+                    <p>
+                        Facebook makes a number of new security features
+                    </p>
+                    <a href="">See more...</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-2">
+        <div class="col-md-2">
 
-      <div class="news-item">
-        <div class="news-content">
-          <p>
-            Facebook makes a number of new security features
-          </p>
-          <a href="">See more...</a>
+            <div class="news-item">
+                <div class="news-content">
+                    <p>
+                        Facebook makes a number of new security features
+                    </p>
+                    <a href="">See more...</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+        <div class="col-md-2">
 
-  </div>
-  <div class="row blue-row">
-
-    <div class="col-xs-10">
-      <div class="col-xs-2 col-md-2">
-        Search Name
-      </div>
-      <div class="col-xs-2 col-md-2">
-        Search Type
-      </div>
-      <div class="col-xs-2 col-md-2">
-        Information Strength
-      </div>
-      <div class="col-xs-3 col-md-3">
-        Search Date
-      </div>
-      <div class="col-xs-1 col-md-1">
-        Critical Issues
-      </div>
-      <div class="col-xs-1 col-md-1">
-        Potential Risks
-      </div>
-      <div class="col-xs-1 col-md-1">
-        Highlights
-      </div>
-    </div>
-    <div class="col-xs-2" block-ui/>
-      <button class="btn btn-primary col-xs-12 btn-white pull-right" ng-click="m.requestNewReport();">New Report</button>
+            <div class="news-item">
+                <div class="news-content">
+                    <p>
+                        Facebook makes a number of new security features
+                    </p>
+                    <a href="">See more...</a>
+                </div>
+            </div>
+        </div>
 
     </div>
-  </div>
-  <div class="new-report" ng-show="m.newReport">
+    <div class="row blue-row">
+
+        <div class="col-xs-10">
+            <div class="col-xs-2 col-md-2">
+                Search Name
+            </div>
+            <div class="col-xs-2 col-md-2">
+                Search Type
+            </div>
+            <div class="col-xs-2 col-md-2">
+                Information Strength
+            </div>
+            <div class="col-xs-3 col-md-3">
+                Search Date
+            </div>
+            <div class="col-xs-1 col-md-1">
+                Critical Issues
+            </div>
+            <div class="col-xs-1 col-md-1">
+                Potential Risks
+            </div>
+            <div class="col-xs-1 col-md-1">
+                Highlights
+            </div>
+        </div>
+        <div class="col-xs-2" />
+        <button class="btn btn-primary btn-white pull-right" ng-click="m.requestNewReport();">New Report</button>
+
+    </div>
+</div>
+<div class="new-report" ng-show="m.newReport">
     <div class="row white-row">
-      <div class="col-xs-10">
-        <div class="col-xs-2 col-md-2">
-          <i class="fa fa-trash trash-can" ng-click="m.newReport = false"></i> -
+        <div class="col-xs-10">
+            <div class="col-xs-2 col-md-2">
+                <i class="fa fa-trash trash-can" ng-click="m.newReport = false"></i> -
+            </div>
+            <div class="col-xs-2 col-md-2">
+                -
+            </div>
+            <div class="col-xs-2 col-md-2">
+                -
+            </div>
+            <div class="col-xs-3 col-md-3">
+                Purchase Required
+            </div>
+            <div class="col-xs-1 col-md-1">
+                -
+            </div>
+            <div class="col-xs-1 col-md-1">
+                -
+            </div>
+            <div class="col-xs-1 col-md-1">
+                -
+            </div>
         </div>
-        <div class="col-xs-2 col-md-2">
-          -
-        </div>
-        <div class="col-xs-2 col-md-2">
-          -
-        </div>
-        <div class="col-xs-3 col-md-3">
-          Purchase Required
-        </div>
-        <div class="col-xs-1 col-md-1">
-          -
-        </div>
-        <div class="col-xs-1 col-md-1">
-          -
-        </div>
-        <div class="col-xs-1 col-md-1">
-          -
-        </div>
-      </div>
 
-      <div class="col-xs-2" block-ui="requestreport">
-        <!-- <button class="btn btn-success pull-right col-xs-12">Buy Now</button> -->
-        <button class="btn btn-success pull-right" ng-click="m.requestReport(m.reportType)" ng-show="m.reportType"><span ng-if="m.reportType == 'Standard'">$19.99</span><span ng-if="m.reportType == 'Detailed'">$99.99</span><span ng-if="m.reportType == 'Professional'">$499.99</span> Buy Now</button>
+        <div class="col-xs-2" block-ui="requestreport">
+            <!-- <button class="btn btn-success pull-right col-xs-12">Buy Now</button> -->
+            <button class="btn btn-success pull-right" ng-click="m.requestReport(m.reportType)" ng-show="m.reportType"><span ng-if="m.reportType == 'Standard'">$19.99</span><span ng-if="m.reportType == 'Detailed'">$99.99</span><span ng-if="m.reportType == 'Professional'">$499.99</span> Buy Now</button>
 
-      </div>
+        </div>
     </div>
     <div class="row light-grey-header">
 
-      <div class="col-xs-3 col-lg-2" ng-click="m.reportType = 'Standard'">
-        <h1 ng-class="{active:m.reportType == 'Standard'}">STANDARD REPORT</h1>
-      </div>
+        <div class="col-xs-3 col-lg-2" ng-click="m.reportType = 'Standard'">
+            <h1 ng-class="{active:m.reportType == 'Standard'}">STANDARD REPORT</h1>
+        </div>
 
-      <div class="col-xs-3 col-lg-2" ng-click="m.reportType = 'Detailed'">
-        <h1 ng-class="{active:m.reportType == 'Detailed'}">DETAILED REPORT</h1>
-      </div>
+        <div class="col-xs-3 col-lg-2" ng-click="m.reportType = 'Detailed'">
+            <h1 ng-class="{active:m.reportType == 'Detailed'}">DETAILED REPORT</h1>
+        </div>
 
-      <div class="col-xs-3 col-lg-2" ng-click="m.reportType = 'Professional'">
-        <h1 ng-class="{active:m.reportType == 'Professional'}">PROFESSIONAL REPORT</h1>
-      </div>
+        <div class="col-xs-3 col-lg-2" ng-click="m.reportType = 'Professional'">
+            <h1 ng-class="{active:m.reportType == 'Professional'}">PROFESSIONAL REPORT</h1>
+        </div>
 
 
-      <div class="col-xs-3 col-lg-5">
+        <div class="col-xs-3 col-lg-5">
 
-      </div>
+        </div>
     </div>
 
     <div class="row grey-background green-background" ng-show="m.reportType == null">
 
-      <div class="col-xs-3  col-lg-2 select-report" ng-click="m.reportType = 'Standard'">
-        <p>
-          Curious about what's out there? We'll give you the basics on what you can find on social media and the internet in general. We'll show how private and secure your information is and the level of risk that information poses. We'll also give you the knowledge
-          to manage that information.
-        </p>
-        <p class="recommend">
-          Recommended for:
-        </p>
-        <div class="icon-block">
-          <i class="fa fa-futbol-o "></i> Child
+        <div class="col-xs-3  col-lg-2 select-report" ng-click="m.reportType = 'Standard'">
+            <p>
+                Curious about what's out there? We'll give you the basics on what you can find on social media and the internet in general. We'll show how private and secure your information is and the level of risk that information poses. We'll also give you the knowledge
+                to manage that information.
+            </p>
+            <p class="recommend">
+                Recommended for:
+            </p>
+            <div class="icon-block">
+                <i class="fa fa-futbol-o "></i> Child
+            </div>
+            <div class="icon-block">
+                <i class="fa fa-user"></i> Adult
+            </div>
+
+            <p class="price">
+                $19.99
+            </p>
         </div>
-        <div class="icon-block">
-          <i class="fa fa-user"></i> Adult
+        <div class="col-xs-3  col-lg-2 select-report" ng-click="m.reportType = 'Detailed'">
+            <p>
+                We'll give you the details on exactly what information is out there and how to find it. We'll give you the details on your public perception and show how you compare to a variety of demo- graphics. And as always, we'll give you the information and tools
+                to define your online presence.
+            </p>
+            <p class="recommend">
+                Recommended for:
+            </p>
+            <div class="icon-block">
+                <i class="fa fa-futbol-o "></i> Child
+            </div>
+            <div class="icon-block">
+                <i class="fa fa-user"></i> Adult
+            </div>
+            <div class="icon-block">
+                <i class="fa fa-suitcase"></i> Business
+            </div>
+            <p class="price">
+                $99.99
+            </p>
         </div>
 
-        <p class="price">
-          $19.99
-        </p>
-      </div>
-      <div class="col-xs-3  col-lg-2 select-report" ng-click="m.reportType = 'Detailed'">
-        <p>
-          We'll give you the details on exactly what information is out there and how to find it. We'll give you the details on your public perception and show how you compare to a variety of demo- graphics. And as always, we'll give you the information and tools
-          to define your online presence.
-        </p>
-        <p class="recommend">
-          Recommended for:
-        </p>
-        <div class="icon-block">
-          <i class="fa fa-futbol-o "></i> Child
-        </div>
-        <div class="icon-block">
-          <i class="fa fa-user"></i> Adult
-        </div>
-        <div class="icon-block">
-          <i class="fa fa-suitcase"></i> Business
-        </div>
-        <p class="price">
-          $99.99
-        </p>
-      </div>
+        <div class="col-xs-3  col-lg-2 select-report" ng-click="m.reportType = 'Professional'">
+            <p>
+                Learn not only how you look, but how you represent a business or institution. Not only do we give you the tools to fix things, we check in on a regular basis to make keep tabs on how it's changing.
+            </p>
+            <p class="recommend">
+                Recommended for:
+            </p>
 
-      <div class="col-xs-3  col-lg-2 select-report" ng-click="m.reportType = 'Professional'">
-        <p>
-          Learn not only how you look, but how you represent a business or institution. Not only do we give you the tools to fix things, we check in on a regular basis to make keep tabs on how it's changing.
-        </p>
-        <p class="recommend">
-          Recommended for:
-        </p>
+            <div class="icon-block">
+                <i class="fa fa-suitcase"></i> Business
+            </div>
+            <div class="icon-block">
+                <i class="fa fa-building"></i> Company
+            </div>
 
-        <div class="icon-block">
-          <i class="fa fa-suitcase"></i> Business
-        </div>
-        <div class="icon-block">
-          <i class="fa fa-building"></i> Company
+            <p class="price">
+                $499.99
+            </p>
         </div>
 
-        <p class="price">
-          $499.99
-        </p>
-      </div>
 
+        <div class="col-xs-3  col-lg-5 instructions">
+            <i class="fa fa-long-arrow-left"></i>Select a detail level to begin
+        </div>
 
-      <div class="col-xs-3  col-lg-5 instructions">
-        <i class="fa fa-long-arrow-left"></i>Select a detail level to begin
-      </div>
+</div>
 
     </div>
-    <!-- {{m.report}} -->
+      <!-- {{m.report}} -->
     <div class="row  grey-background form" ng-show="m.reportType != null">
 
-      <div class="col-xs-6">
-        <div class="row">
-          <div class="col-xs-6">
-            <label>First Name</label>
-            <input type="text" class="form-control" ng-model="m.report.firstName" placeholder="First Name" />
+        <div class="col-xs-6">
+            <div class="row">
+                <div class="col-xs-6">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" ng-model="m.report.firstName" placeholder="First Name" />
 
-          </div>
-          <div class="col-xs-6"> <label>Last Name</label>
-            <input type="text" class="form-control" ng-model="m.report.lastName" placeholder="Last Name" />
-          </div>
-        </div>
-        <label>Age Group</label>
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="btn-group">
+                </div>
+                <div class="col-xs-6">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" ng-model="m.report.lastName" placeholder="Last Name" />
+                </div>
+            </div>
+            <label>Age Group</label>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="btn-group">
 
-                <label class="btn btn-primary" ng-model="m.report.ageGroup" ng-repeat="item in ageGroup" uib-btn-radio="'{{item}}'">{{item}}</label>
+                        <label class="btn btn-primary" ng-model="m.report.ageGroup" ng-repeat="item in ageGroup" uib-btn-radio="'{{item}}'">{{item}}</label>
+
+                    </div>
+                </div>
+            </div>
+            <div ng-show="m.reportType == 'Detailed' || m.reportType == 'Professional'">
+
+                <label>Nick Name</label>
+                <div ng-repeat="item in m.report.createNickname(m.nickNameKey) track by $index" class="row">
+                    <div class=" col-xs-11">
+                        <input type="text" class="form-control" ng-model="m.report.nickNames[$index]" placeholder="Nickname" />
+                    </div>
+                    <button class="btn btn-danger col-xs-1" ng-disabled="m.nickNameKey<=1" ng-click="m.report.deleteNickname($index)"><i class="fa fa-close"></i></button>
+                </div>
+                <button class="btn btn-success btn-sm" ng-click="m.nickNameKey = m.nickNameKey + 1">Add another nickname</button>
+
+                <div class="row">
+                </div>
 
             </div>
-          </div>
-        </div>
-        <div ng-show="m.reportType == 'Detailed' || m.reportType == 'Professional'">
-
-          <label>Nick Name</label>
-          <div ng-repeat="item in m.report.createNickname(m.nickNameKey) track by $index" class="row">
-            <div class=" col-xs-11">
-              <input type="text" class="form-control" ng-model="m.report.nickNames[$index]" placeholder="Nickname" />
+            <label>Email Address</label>
+            <div class="row" ng-repeat="item in m.report.createEmail(m.emailKey) track by $index">
+                <div class=" col-xs-11">
+                    <input type="text" class="form-control" ng-model="m.report.emailAddresses[$index]" placeholder="Email" />
+                </div>
+                <button class="btn btn-danger col-xs-1" ng-disabled="m.emailKey<=1" ng-click="m.report.deleteEmail($index)"><i class="fa fa-close"></i></button>
             </div>
-            <button class="btn btn-danger col-xs-1" ng-disabled="m.nickNameKey<=1" ng-click="m.report.deleteNickname($index)"><i class="fa fa-close"></i></button>
-          </div>
-          <button class="btn btn-success btn-sm" ng-click="m.nickNameKey = m.nickNameKey + 1">Add another nickname</button>
+            <button class="btn btn-success btn-sm" ng-click="m.emailKey = m.emailKey + 1">Add another email</button>
 
-          <div class="row">
-          </div>
 
+            <hr />
+            <div ng-show="m.reportType == 'Detailed' || m.reportType == 'Professional'">
+                <label>Current Town/City of Residence</label>
+                <input type="text" class="form-control" ng-model="m.report.cityResidence" />
+
+                <label>Town/City you grew up in</label>
+                <input type="text" class="form-control" ng-model="m.report.cityGrewIn" />
+
+                <label>High school you attended</label>
+                <input type="text" class="form-control" ng-model="m.report.highSchoolAttended" />
+                <label>Post secondary education</label>
+                <input type="text" class="form-control" ng-model="m.report.postSecondaryEducation" />
+            </div>
+            <label>Current school or employer</label>
+            <input type="text" class="form-control" ng-model="m.report.employer" />
+
+            <div ng-show="m.reportType == 'Detailed' || m.reportType == 'Professional'">
+                <label>Past Employer</label>
+                <input type="text" class="form-control" ng-model="m.report.pastEmployer" />
+                <hr />
+                <label>Personal Website</label>
+                <input type="text" class="form-control" ng-model="m.report.personalWebsiteURL" />
+
+                <label>LinkedIn Page</label>
+                <input type="text" class="form-control" ng-model="m.report.linkedInPage" />
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <label>Facebook Handle</label>
+                    <input type="text" class="form-control" ng-model="m.report.faceBookHandle" />
+                </div>
+                <div class="col-xs-4">
+                    <label>Twitter Handle</label>
+                    <input type="text" class="form-control" ng-model="m.report.twitterHandle" />
+                </div>
+                <div class="col-xs-4">
+                    <label>Instagram Handle</label>
+                    <input type="text" class="form-control" ng-model="m.report.instagramHandle" />
+                </div>
+            </div>
+
+            <div ng-show="m.reportType == 'Professional'">
+                <hr />
+                <h1>Alignment with corporate values</h1>
+                <label>Expectations as an employee of the company</label>
+                <textarea class="form-control" ng-model="m.report.expecationsWithEmployee" />
+                <label>Expectations outside of the company</label>
+                <textarea type="text" class="form-control" ng-model="m.report.expecationsOutsideCompany" />
+                <hr />
+            </div>
+
+            <div ng-show="m.reportType == 'Detailed' || m.reportType == 'Professional'">
+                <p>
+                    Recurring reports give you an idea of how your profile has changed over time. You can pause them at any time.
+                </p>
+                <label>How Often</label>
+                <select ng-model="m.report.recurringInterval">
+                    <option>
+                        Weekly
+                    </option>
+                    <option>
+                        Monthly
+                    </option>
+                </select>
+                <label>How Long</label>
+                <select ng-model="m.report.recurringTimeFrame">
+                    <option>
+                        Weekly
+                    </option>
+                    <option>
+                        Monthly
+                    </option>
+                </select>
+            </div>
         </div>
-        <label>Email Address</label>
-        <div class="row" ng-repeat="item in m.report.createEmail(m.emailKey) track by $index">
-          <div class=" col-xs-11">
-            <input type="text" class="form-control" ng-model="m.report.emailAddresses[$index]" placeholder="Email" />
-          </div>
-          <button class="btn btn-danger col-xs-1" ng-disabled="m.emailKey<=1" ng-click="m.report.deleteEmail($index)"><i class="fa fa-close"></i></button>
-        </div>
-        <button class="btn btn-success btn-sm" ng-click="m.emailKey = m.emailKey + 1">Add another email</button>
-
-
-        <hr />
-        <div ng-show="m.reportType == 'Detailed' || m.reportType == 'Professional'">
-          <label>Current Town/City of Residence</label>
-          <input type="text" class="form-control" ng-model="m.report.cityResidence" />
-
-          <label>Town/City you grew up in</label>
-          <input type="text" class="form-control" ng-model="m.report.cityGrewIn" />
-
-          <label>High school you attended</label>
-          <input type="text" class="form-control" ng-model="m.report.highSchoolAttended" />
-          <label>Post secondary education</label>
-          <input type="text" class="form-control" ng-model="m.report.postSecondaryEducation" />
-        </div>
-        <label>Current school or employer</label>
-        <input type="text" class="form-control" ng-model="m.report.employer" />
-
-        <div ng-show="m.reportType == 'Detailed' || m.reportType == 'Professional'">
-          <label>Past Employer</label>
-          <input type="text" class="form-control" ng-model="m.report.pastEmployer" />
-          <hr />
-          <label>Personal Website</label>
-          <input type="text" class="form-control" ng-model="m.report.personalWebsiteURL" />
-
-          <label>LinkedIn Page</label>
-          <input type="text" class="form-control" ng-model="m.report.linkedInPage" />
-        </div>
-        <div class="row">
-          <div class="col-xs-4">
-            <label>Facebook Handle</label>
-            <input type="text" class="form-control" ng-model="m.report.faceBookHandle" />
-          </div>
-          <div class="col-xs-4">
-            <label>Twitter Handle</label>
-            <input type="text" class="form-control" ng-model="m.report.twitterHandle" />
-          </div>
-          <div class="col-xs-4">
-            <label>Instagram Handle</label>
-            <input type="text" class="form-control" ng-model="m.report.instagramHandle" />
-          </div>
-        </div>
-
-        <div ng-show="m.reportType == 'Professional'">
-          <hr />
-          <h1>Alignment with corporate values</h1>
-          <label>Expectations as an employee of the company</label>
-          <textarea class="form-control" ng-model="m.report.expecationsWithEmployee" />
-          <label>Expectations outside of the company</label>
-          <textarea type="text" class="form-control" ng-model="m.report.expecationsOutsideCompany" />
-          <hr />
-        </div>
-
-        <div ng-show="m.reportType == 'Detailed' || m.reportType == 'Professional'">
-          <p>
-            Recurring reports give you an idea of how your profile has changed over time. You can pause them at any time.
-          </p>
-          <label>How Often</label>
-          <select ng-model="m.report.recurringInterval">
-        <option>
-          Weekly
-        </option>
-        <option>
-          Monthly
-        </option></select>
-          <label>How Long</label>
-          <select ng-model="m.report.recurringTimeFrame">
-        <option>
-          Weekly
-        </option>
-        <option>
-          Monthly
-        </option></select>
-        </div>
-      </div>
 
 
     </div>
 
     <div class="row light-grey-background" ng-show="m.reportType != null">
-      <div class="container-fluid" block-ui="requestreport">
-        <button class="btn btn-success btn-lg pull-right" ng-click="m.requestReport(m.reportType)"><span ng-if="m.reportType == 'Standard'">$19.99</span><span ng-if="m.reportType == 'Detailed'">$99.99</span><span ng-if="m.reportType == 'Professional'">$499.99</span> Buy Now</button>
+        <div class="container-fluid" block-ui="requestreport">
+            <button class="btn btn-success btn-lg pull-right" ng-click="m.requestReport(m.reportType)"><span ng-if="m.reportType == 'Standard'">$19.99</span><span ng-if="m.reportType == 'Detailed'">$99.99</span><span ng-if="m.reportType == 'Professional'">$499.99</span> Buy Now</button>
 
-      </div>
+        </div>
     </div>
-  </div>
-  <!-- {{m.Reports}} -->
-  <div class="submitted-report" ng-repeat="report in m.Reports">
-    <!-- {{report}} -->
-    <div class="row white-row" ng-click="report.openReport = !report.openReport">
-      <div class="col-xs-10">
-        <div class="col-xs-2 col-md-2" block-ui="deletereport">
-          <i class="fa fa-trash trash-can" ng-click="m.deleteReport(report.reportId); $event.stopPropagation
+    
+
+    
+
+</div>
+
+
+
+ <!-- {{m.Reports}} -->
+<div style="min-height:200px;" block-ui="mysearhes">
+    <div class="submitted-report" ng-repeat="report in m.Reports">
+
+        <!-- {{report}} -->
+        <div class="row white-row" ng-click="report.openReport = !report.openReport">
+            <div class="col-xs-10">
+                <div class="col-xs-2 col-md-2" block-ui="deletereport">
+                    <i class="fa fa-trash trash-can" ng-click="m.deleteReport(report.reportId); $event.stopPropagation
              ;"></i> {{report.firstName}} {{report.lastName}}
-        </div>
-        <div class="col-xs-2 col-md-2">
-          {{report.reportType}}
-        </div>
-        <div class="col-xs-2 col-md-2">
-          <div class="information-strength">
-            <div class="strength">
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    {{report.reportType}}
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    <div class="information-strength">
+                        <div class="strength">
 
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-3 col-md-3">
-          {{reportPayment ? (report.dateRequested | date) : 'Purchase Required'}}
-        </div>
-        <div class="col-xs-1 col-md-1">
-          {{report.noOfCriticalIssues}}
-        </div>
-        <div class="col-xs-1 col-md-1">
-          {{report.noOfPotentialRisks}}
-        </div>
-        <div class="col-xs-1 col-md-1">
-          {{report.noOfHighlights}}
-        </div>
-      </div>
-
-      <div class="col-xs-2">
-
-        <button class="btn btn-primary pull-right col-xs-12" ng-disabled="report.reportStatus != 'Published'"ng-click="goto('/view-report/' + report.reportId)">View Report</button>
-
-      </div>
-    </div>
-    <div class="row light-grey-header" ng-show="report.openReport">
-
-
-      <div class="col-xs-2">
-        <h1 ng-class="{active:report.reportType == 'Standard'}">STANDARD REPORT</h1>
-      </div>
-
-      <div class="col-xs-2">
-        <h1 ng-class="{active:report.reportType == 'Detailed'}">DETAILED REPORT</h1>
-      </div>
-
-      <div class="col-xs-2">
-        <h1 ng-class="{active:report.reportType == 'Professional'}">PROFESSIONAL REPORT</h1>
-      </div>
-
-
-      <div class="col-xs-5">
-
-      </div>
-    </div>
-
-    <div class="row  grey-background form" ng-show="report.openReport">
-
-      <div class="col-xs-6">
-        <div class="row">
-          <div class="col-xs-6">
-            <label>First Name</label>
-            <input type="text" class="form-control" ng-model="report.firstName" placeholder="First Name" />
-
-          </div>
-          <div class="col-xs-6"> <label>Last Name</label>
-            <input type="text" class="form-control" ng-model="report.lastName" placeholder="Last Name" />
-          </div>
-        </div>
-        <label>Age Group</label>
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="btn-group">
-              <label class="btn btn-primary" ng-model="report.ageGroup" ng-repeat="item in ageGroup" uib-btn-radio="'{{item}}'">{{item}}</label>
-
-            </div>
-          </div>
-        </div>
-        <div ng-show="report.reportType == 'Detailed' || report.reportType == 'Professional'">
-
-          <label>Nick Name</label>
-          <div ng-repeat="item in report.nickNames track by $index" class="row">
-            <div class=" col-xs-12">
-              <input type="text" class="form-control" ng-model="item" placeholder="Nickname" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-md-3">
+                    {{reportPayment ? (report.dateRequested | date) : 'Purchase Required'}}
+                </div>
+                <div class="col-xs-1 col-md-1">
+                    {{report.noOfCriticalIssues}}
+                </div>
+                <div class="col-xs-1 col-md-1">
+                    {{report.noOfPotentialRisks}}
+                </div>
+                <div class="col-xs-1 col-md-1">
+                    {{report.noOfHighlights}}
+                </div>
             </div>
 
-          </div>
+            <div class="col-xs-2">
+
+                <button class="btn btn-primary pull-right col-xs-12" ng-disabled="report.reportStatus != 'Published'" ng-click="goto('/view-report/' + report.reportId)">View Report</button>
+
+            </div>
+        </div>
+        <div class="row light-grey-header" ng-show="report.openReport">
+
+
+            <div class="col-xs-2">
+                <h1 ng-class="{active:report.reportType == 'Standard'}">STANDARD REPORT</h1>
+            </div>
+
+            <div class="col-xs-2">
+                <h1 ng-class="{active:report.reportType == 'Detailed'}">DETAILED REPORT</h1>
+            </div>
+
+            <div class="col-xs-2">
+                <h1 ng-class="{active:report.reportType == 'Professional'}">PROFESSIONAL REPORT</h1>
+            </div>
+
+
+            <div class="col-xs-5">
+
+            </div>
+        </div>
+
+        <div class="row  grey-background form" ng-show="report.openReport">
+
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" ng-model="report.firstName" placeholder="First Name" />
+
+                    </div>
+                    <div class="col-xs-6">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" ng-model="report.lastName" placeholder="Last Name" />
+                    </div>
+                </div>
+                <label>Age Group</label>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="btn-group">
+                            <label class="btn btn-primary" ng-model="report.ageGroup" ng-repeat="item in ageGroup" uib-btn-radio="'{{item}}'">{{item}}</label>
+
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="report.reportType == 'Detailed' || report.reportType == 'Professional'">
+
+                    <label>Nick Name</label>
+                    <div ng-repeat="item in report.nickNames track by $index" class="row">
+                        <div class=" col-xs-12">
+                            <input type="text" class="form-control" ng-model="item" placeholder="Nickname" />
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label>Email Address</label>
+                <div class="row" ng-repeat="item in report.emailAddresses track by $index">
+                    <div class=" col-xs-12">
+                        <input type="text" class="form-control" ng-model="item" placeholder="Nickname" />
+                    </div>
+                </div>
+
+                <hr />
+
+                <div ng-show="report.reportType== 'Detailed' || report.reportType== 'Professional'">
+                    <label>Current Town/City of Residence</label>
+                    <input type="text" class="form-control" ng-model="report.cityResidence" />
+
+                    <label>Town/City you grew up in</label>
+                    <input type="text" class="form-control" ng-model="report.cityGrewIn" />
+
+                    <label>High school you attended</label>
+                    <input type="text" class="form-control" ng-model="report.highSchoolAttended" />
+                    <label>Post secondary education</label>
+                    <input type="text" class="form-control" ng-model="report.postSecondaryEducation" />
+                </div>
+                <label>Current school or employer</label>
+                <input type="text" class="form-control" ng-model="report.employer" />
+
+                <div ng-show="m.reportType == 'Detailed' || m.reportType == 'Professional'">
+                    <label>Past Employer</label>
+                    <input type="text" class="form-control" ng-model="report.pastEmployer" />
+                    <hr />
+                    <label>Personal Website</label>
+                    <input type="text" class="form-control" ng-model="report.personalWebsiteURL" />
+
+                    <label>LinkedIn Page</label>
+                    <input type="text" class="form-control" ng-model="report.linkedInPage" />
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <label>Facebook Handle</label>
+                        <input type="text" class="form-control" ng-model="report.faceBookHandle" />
+                    </div>
+                    <div class="col-xs-4">
+                        <label>Twitter Handle</label>
+                        <input type="text" class="form-control" ng-model="report.twitterHandle" />
+                    </div>
+                    <div class="col-xs-4">
+                        <label>Instagram Handle</label>
+                        <input type="text" class="form-control" ng-model="report.instagramHandle" />
+                    </div>
+                </div>
+
+                <div ng-show="report.reportType== 'Professional'">
+                    <hr />
+                    <h1>Alignment with corporate values</h1>
+                    <label>Expectations as an employee of the company</label>
+                    <textarea class="form-control" ng-model="report.expecationsWithEmployee" />
+                    <label>Expectations outside of the company</label>
+                    <textarea type="text" class="form-control" ng-model="report.expecationsOutsideCompany" />
+                    <hr />
+                </div>
+
+                <div ng-show="report.reportType== 'Detailed' || report.reportType== 'Professional'">
+                    <p>
+                        Recurring reports give you an idea of how your profile has changed over time. You can pause them at any time.
+                    </p>
+                    <label>How Often</label>
+                    <select ng-model="report.recurringInterval">
+                        <option>
+                            Weekly
+                        </option>
+                        <option>
+                            Monthly
+                        </option>
+                    </select>
+                    <label>How Long</label>
+                    <select ng-model="report.recurringTimeFrame">
+                        <option>
+                            Weekly
+                        </option>
+                        <option>
+                            Monthly
+                        </option>
+                    </select>
+                </div>
+            </div>
+
 
         </div>
 
-        <label>Email Address</label>
-        <div class="row" ng-repeat="item in report.emailAddresses track by $index">
-          <div class=" col-xs-12">
-            <input type="text" class="form-control" ng-model="item" placeholder="Nickname" />
-          </div>
+        <div class="row blue-gradient-row" ng-click="report.openReport = !report.openReport">
+            <h2><i class="fa" ng-class="{'fa-chevron-up': report.openReport, 'fa-chevron-down': !report.openReport}"></i></h2>
         </div>
-
-        <hr />
-
-        <div ng-show="report.reportType== 'Detailed' || report.reportType== 'Professional'">
-          <label>Current Town/City of Residence</label>
-          <input type="text" class="form-control" ng-model="report.cityResidence" />
-
-          <label>Town/City you grew up in</label>
-          <input type="text" class="form-control" ng-model="report.cityGrewIn" />
-
-          <label>High school you attended</label>
-          <input type="text" class="form-control" ng-model="report.highSchoolAttended" />
-          <label>Post secondary education</label>
-          <input type="text" class="form-control" ng-model="report.postSecondaryEducation" />
-        </div>
-        <label>Current school or employer</label>
-        <input type="text" class="form-control" ng-model="report.employer" />
-
-        <div ng-show="m.reportType == 'Detailed' || m.reportType == 'Professional'">
-          <label>Past Employer</label>
-          <input type="text" class="form-control" ng-model="report.pastEmployer" />
-          <hr />
-          <label>Personal Website</label>
-          <input type="text" class="form-control" ng-model="report.personalWebsiteURL" />
-
-          <label>LinkedIn Page</label>
-          <input type="text" class="form-control" ng-model="report.linkedInPage" />
-        </div>
-        <div class="row">
-          <div class="col-xs-4">
-            <label>Facebook Handle</label>
-            <input type="text" class="form-control" ng-model="report.faceBookHandle" />
-          </div>
-          <div class="col-xs-4">
-            <label>Twitter Handle</label>
-            <input type="text" class="form-control" ng-model="report.twitterHandle" />
-          </div>
-          <div class="col-xs-4">
-            <label>Instagram Handle</label>
-            <input type="text" class="form-control" ng-model="report.instagramHandle" />
-          </div>
-        </div>
-
-        <div ng-show="report.reportType== 'Professional'">
-          <hr />
-          <h1>Alignment with corporate values</h1>
-          <label>Expectations as an employee of the company</label>
-          <textarea class="form-control" ng-model="report.expecationsWithEmployee" />
-          <label>Expectations outside of the company</label>
-          <textarea type="text" class="form-control" ng-model="report.expecationsOutsideCompany" />
-          <hr />
-        </div>
-
-        <div ng-show="report.reportType== 'Detailed' || report.reportType== 'Professional'">
-          <p>
-            Recurring reports give you an idea of how your profile has changed over time. You can pause them at any time.
-          </p>
-          <label>How Often</label>
-          <select ng-model="report.recurringInterval">
-        <option>
-          Weekly
-        </option>
-        <option>
-          Monthly
-        </option></select>
-          <label>How Long</label>
-          <select ng-model="report.recurringTimeFrame">
-        <option>
-          Weekly
-        </option>
-        <option>
-          Monthly
-        </option></select>
-        </div>
-      </div>
-
-
     </div>
-
-    <div class="row blue-gradient-row" ng-click="report.openReport = !report.openReport">
-      <h2><i class="fa" ng-class="{'fa-chevron-up': report.openReport, 'fa-chevron-down': !report.openReport}"></i></h2>
-    </div>
-  </div>
 </div>

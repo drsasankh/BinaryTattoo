@@ -1,4 +1,4 @@
-BinaryTattooApp.controller('reportController', function reportController($scope, $http, $rootScope, $location, $uibModal, $route, $routeParams) {
+BinaryTattooApp.controller('reportController', function reportController($scope, $http, $rootScope, $location, $uibModal, $route, $routeParams, blockUI) {
     $scope.m = {};
     $scope.m.report;
     $scope.m.userReportGoogleSearchItems;
