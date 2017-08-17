@@ -30,11 +30,9 @@
     </div>
 
     <div class="col-xs-2">
-      <input type="text" class="form-control" placeholder="Search Users" />
-
+      <input type="text" class="form-control" placeholder="Search Users" ng-model="searchText"/>        
     </div>
   </div>
-
   <ng-include src="'templates/partials/PendingReports.html'" ng-if="m.step==0"></ng-include>
   <ng-include src="'templates/partials/PublishedReports.html'" ng-if="m.step==1"></ng-include>
   <ng-include src="'templates/partials/Users.html'" ng-if="m.step==2"></ng-include>
@@ -44,4 +42,4 @@
 
 
 </div>
-</div>
+

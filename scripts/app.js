@@ -190,4 +190,5 @@ BinaryTattooApp.config(function (blockUIConfig, $httpProvider) {
     //blockUIConfig.resetOnException = false;
 
 });
+
 //test

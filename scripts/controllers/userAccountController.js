@@ -55,5 +55,13 @@ BinaryTattooApp.controller('userAccountsController', function userAccountsContro
 
     $scope.m.getUserAccount();
 
+    $scope.m.getFilteredAccounts = function () {
+        console.log(!$scope.m.users);
+        if (!$scope.m.users)
+            return [];
+        return $scope.m.users.filter(function (a) {
+            return !$scope.searchText || (a.email && a.email.toLowerCase().includes($scope.searchText.toLowerCase()))
+        }) || [];
+    };
 
 });

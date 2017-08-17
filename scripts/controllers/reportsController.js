@@ -1,6 +1,5 @@
 BinaryTattooApp.controller('pendingReportsController', function pendingReportsController($scope, $http, $rootScope, blockUI) {
     $scope.m = {};
-
     $scope.m.getReport = function () {
         var params = {
             "pageSize": 0,
@@ -30,6 +29,12 @@ BinaryTattooApp.controller('pendingReportsController', function pendingReportsCo
     }
 
     $scope.m.init();
+
+    $scope.m.getFilteredData = function () {
+        if (!$scope.m.reports)
+            return [];
+        return $scope.m.reports.data.filter(function (a) { return !$scope.searchText || (a.firstName && a.firstName.toLowerCase().includes($scope.searchText.toLowerCase())) }) || [];
+    };
 
     // $scope.m.getReport();
 });
@@ -70,4 +75,12 @@ BinaryTattooApp.controller('publishedReportsController', function publishedRepor
 
     $scope.m.init();
     // $scope.m.getReport();
+
+    $scope.m.getFilteredData = function () {
+        if (!$scope.m.reports)
+            return [];
+        return $scope.m.reports.filter(function (a) {
+            return !$scope.searchText || (a.firstName && a.firstName.toLowerCase().includes($scope.searchText.toLowerCase()))
+        }) || [];
+    };
 });

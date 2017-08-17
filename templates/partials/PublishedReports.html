@@ -29,7 +29,7 @@
     </div>
 
     <!-- ng-click="report.openReport = !report.openReport"? -->
-    <div class="submitted-report" ng-repeat="report in m.reports">
+    <div class="submitted-report" ng-repeat="report in m.getFilteredData()">
         <div class="row white-row">
             {{}}
             <div class="col-xs-10">
