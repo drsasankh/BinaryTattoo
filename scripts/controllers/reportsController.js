@@ -22,7 +22,7 @@ BinaryTattooApp.controller('pendingReportsController', function pendingReportsCo
                 myBlockUI.stop();
                 console.log(response.data)
 
-            })
+            });
 
     }
     $scope.m.init = function () {
