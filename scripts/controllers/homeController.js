@@ -189,4 +189,31 @@ BinaryTattooApp.controller('homeController', function homeController($scope, $ht
             )
         }
     }
+
+    $scope.sort = function (propName) {
+        if (!$scope.sortOrder)
+            $scope.sortOrder = true;
+        else
+            $scope.sortOrder = !$scope.sortOrder;
+        $scope.m.Reports = $scope.m.Reports.sort(function (a, b) {
+            return sort(a[propName], b[propName], $scope.sortOrder);
+        });
+    }
+
+    function sort(a, b, order) {
+        if (a && b && a.toLowerCase && b.toLowerCase) {
+            a = a.toLowerCase();
+            b = b.toLowerCase();
+        }
+        if (a === b)
+            ret = 0;
+        else if (a < b) {
+            ret = order ? - 1 : 1;
+        }
+        else
+            ret = order ? 1 : -1;
+
+        //console.log(a + ' ' + b + ' ' + order + ' ' + ret);
+        return ret;
+    }
 });
