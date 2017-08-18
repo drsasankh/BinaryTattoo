@@ -1,61 +1,61 @@
 <div class="container-fluid sub-section" ng-controller="usersController" block-ui="getusers">
-  <div class="row blue-row">
+    <div class="row blue-row">
 
-    <div class="col-xs-12">
-      <div class="col-xs-4">
-        Email
-      </div>
-      <div class="col-xs-2">
-        Signup Date
-      </div>
+        <div class="col-xs-12">
+            <div class="col-xs-4">
+                <a ng-click="sort('email')">Email</a>
+            </div>
+            <div class="col-xs-2">
+                <a ng-click="sort()">Signup Date</a>
+            </div>
 
-      <div class="col-xs-1">
-        Draft Reports
-      </div>
-      <div class="col-xs-1">
-        Pending Reports
-      </div>
-      <div class="col-xs-1">
-        Complete Reports
-      </div>
-      <div class="col-xs-1">
-        Recurring Reports
-      </div>
-      <div class="col-xs-1">
-        Newsletter
-      </div>
-    </div>
-
-  </div>
-  <div class="row white-row" ng-repeat="user in m.getFilteredUsers()">
-    <div class="col-xs-12">
-      <div class="col-xs-4">
-        {{user.email}}
-      </div>
-      <div class="col-xs-2">
-        Missing
-      </div>
-      <div class="col-xs-1">
-        {{user.draftReportsCount || '0'}}
-      </div>
-      <div class="col-xs-1">
-        {{user.pendingReportsCount || '0'}}
-      </div>
-      <div class="col-xs-1">
-        {{user.completeReportsCount || '0'}}
-      </div>
-      <div class="col-xs-1">
-        {{user.recurringReportsCount || '0'}}
-      </div>
-      <div class="col-xs-1">
-        <div class="checkbox">
-          <label>
-          <input type="checkbox" ng-model="user.emailSubscription">
-          </label>
+            <div class="col-xs-1">
+                <a ng-click="sort('draftReportsCount')">Draft Reports</a>
+            </div>
+            <div class="col-xs-1">
+                <a ng-click="sort('pendingReportsCount')">Pending Reports</a>
+            </div>
+            <div class="col-xs-1">
+                <a ng-click="sortByName()">Complete Reports</a>
+            </div>
+            <div class="col-xs-1">
+                <a ng-click="sortByName()">Recurring Reports</a>
+            </div>
+            <div class="col-xs-1">
+                <a ng-click="sortByName()" Newsletter</a>
+            </div>
         </div>
-      </div>
+
     </div>
+    <div class="row white-row" ng-repeat="user in m.getFilteredUsers()">
+        <div class="col-xs-12">
+            <div class="col-xs-4">
+                {{user.email}}
+            </div>
+            <div class="col-xs-2">
+                Missing
+            </div>
+            <div class="col-xs-1">
+                {{user.draftReportsCount || '0'}}
+            </div>
+            <div class="col-xs-1">
+                {{user.pendingReportsCount || '0'}}
+            </div>
+            <div class="col-xs-1">
+                {{user.completeReportsCount || '0'}}
+            </div>
+            <div class="col-xs-1">
+                {{user.recurringReportsCount || '0'}}
+            </div>
+            <div class="col-xs-1">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="user.emailSubscription">
+                    </label>
+                </div>
+            </div>
+        </div>
 
 
-  </div>
+    </div>
 </div>
